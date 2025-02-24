@@ -34,78 +34,9 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <section class="bg-light py-5 text-center">
-            <h3>Subscribe to Our Newsletter</h3>
-            <p>Stay updated with our latest blog posts and design tips.</p>
-            <form class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <input type="email" class="form-control" placeholder="Enter your email">
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-dark">Subscribe</button>
-                    </div>
-                </div>
-            </form>
-        </section>
+        @await Html.PartialAsync("_Newsletter")
     </div>
-
-    <footer class="footer">
-        <!-- Logo & Socials -->
-        <div>
-            <h3>Aesthetica</h3>
-            <div class="social-icons">
-                <a href="#">X</a>
-                <a href="#">📷</a>
-                <a href="#">▶️</a>
-                <a href="#">🔗</a>
-            </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div>
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Career</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
-
-        <!-- Services -->
-        <div>
-            <h3>Services</h3>
-            <ul>
-                <li><a href="#">Stay Updated with Our Blog</a></li>
-                <li><a href="#">Design Your Space</a></li>
-                <li><a href="#">Plan Your Budget</a></li>
-                <li><a href="#">Get an Instant Quote</a></li>
-                <li><a href="#">Measure Your Room</a></li>
-                <li><a href="#">Chat with Us Live</a></li>
-                <li><a href="#">Join Our Team</a></li>
-            </ul>
-        </div>
-
-        <!-- Contact Info -->
-        <div>
-            <h3>Get in touch</h3>
-            <p>📍 123 Main Street, Your City, State Country.</p>
-            <p>📞 (123) 456-7890 <br> (123) 456-7890</p>
-            <p>📧 aesthetica@gmail.com</p>
-        </div>
-
-        <!-- Footer Bottom (Merged into Main Footer) -->
-        <div class="footer-bottom">
-            <p>
-                © 2025 <strong>Interior Design Blog.</strong> All Rights Reserved.
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-            </p>
-        </div>
-    </footer>
+    @await Html.PartialAsync("_Footer")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

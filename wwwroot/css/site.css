@@ -72,29 +72,18 @@ section.bg-light {
         }
 
 /* Footer Bottom (Merged) */
-.footer-bottom {
+.bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     border-top: 1px solid #555;
+    font-size: 14px;
+    position: fixed; /* Position fixed at the bottom */
 }
 
-    .footer-bottom p {
-        background-color: #575757;
-        font-size: 14px;
-        color: #bbb;
+    .bottom a {
+        margin-top: 15px;
     }
-
-    .footer-bottom a {
-        color: #bbb;
-        text-decoration: none;
-        margin-left: 15px;
-    }
-
-        .footer-bottom a:hover {
-            color: white;
-        }
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -102,9 +91,8 @@ section.bg-light {
         text-align: center;
     }
 
-    .footer-bottom {
+    .bottom {
         flex-direction: column;
-        gap: 10px;
         text-align: center;
     }
 }

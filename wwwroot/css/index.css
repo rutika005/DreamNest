@@ -9,7 +9,7 @@
 
     /* Styling for images */
     .gallery-container img {
-        width: 640px; /* Adjust as needed */
+        width: 740px; /* Adjust as needed */
         height: auto;
         border-radius: 10px;
         object-fit: cover;
@@ -97,7 +97,6 @@
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-    border-top: 1px solid #555;
 }
 
     .footer-bottom p {
