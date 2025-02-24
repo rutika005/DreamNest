@@ -3,20 +3,29 @@
 }
 
 <div>
-    <section class="text-white d-flex justify-content-center align-items-center position-relative"
-             style="background-image: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?cs=srgb&dl=pexels-fotoaibe-1571460.jpg&fm=jpg');
-           background-size: cover;
-           background-position: center;
-           min-height: 580px;
-           width: 100%;">
+    <section>
+    <div class="slideshow-container">
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?cs=srgb&dl=pexels-fotoaibe-1571460.jpg&fm=jpg" alt="Nature" style="height:fit-content">
+            <div class="text-overlay">Beautiful Nature</div>
+        </div>
 
-        <!-- Background Overlay for Better Readability -->
-        <div class="position-absolute top-0 start-0 w-100 h-100"
-             style="background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="slide">
+                <img src="https://img.lovepik.com/bg/20240427/stunning-3d-rendered-backgrounds-with-expertly-crafted-interior-design_7987045_wh860.jpg!/fw/860" alt="City" style="height:fit-content">
+            <div class="text-overlay">Amazing City View</div>
+        </div>
 
-        <h1 class="fw-bold position-relative text-center">PROFESSIONAL INTERIOR DESIGN</h1>
+        <div class="slide">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/029/089/826/small/beautiful-interior-design-room-background-wallpaper-generative-ai-photo.jpg" alt="Ocean" style="height:fit-content">
+            <div class="text-overlay">Relaxing Ocean Waves</div>
+        </div>
+            <div class="slide">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20230704/pngtree-contemporary-beige-home-interior-featuring-chic-modern-furniture-3d-render-image_3756970.jpg
+ " alt="Ocean" style="height:fit-content">
+                <div class="text-overlay">Relaxing Ocean Waves</div>
+            </div>
+    </div>
     </section>
-
         <div class="gallery-container">
             <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?cs=srgb&dl=pexels-fotoaibe-1571460.jpg&fm=jpg" alt="Image 1">
             <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?cs=srgb&dl=pexels-fotoaibe-1571460.jpg&fm=jpg" alt="Image 2">
@@ -57,3 +66,23 @@
     </section>
 
 </div>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+
+        slides[slideIndex - 1].style.display = "block";
+
+        setTimeout(showSlides, 4000); // Change image every 4 seconds
+    }
+</script>
