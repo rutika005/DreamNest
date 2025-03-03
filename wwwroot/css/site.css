@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 section.bg-light {
@@ -75,16 +75,16 @@ section.bg-light {
         padding: 0;
     }
 
-            .footer ul li a {
-                text-decoration: none;
-                color: white;
-                font-size: 14px;
-                transition: color 0.3s;
-            }
+        .footer ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
 
-                .footer ul li a:hover {
-                    color: #ccc;
-                }
+            .footer ul li a:hover {
+                color: #ccc;
+            }
 
 /* Social Media Icons */
 .social-icons {
@@ -129,6 +129,7 @@ section.bg-light {
         text-align: center;
     }
 }
+
 .slideshow-container {
     position: relative;
     width: 100%;
@@ -290,7 +291,7 @@ section.bg-light {
 
 .services-section {
     padding: 40px 15px;
-    text-align:center;
+    text-align: center;
 }
 
     .services-section h2 {
@@ -403,15 +404,14 @@ section.bg-light {
 
         .footer-bottom a:hover {
             color: white;
-        
-    border-top: 1px solid #555;
-    font-size: 14px;
-    position: fixed; /* Position fixed at the bottom */
-}
+            border-top: 1px solid #555;
+            font-size: 14px;
+            position: fixed; /* Position fixed at the bottom */
+        }
 
-    .bottom a {
-        margin-top: 15px;
-    }
+.bottom a {
+    margin-top: 15px;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -481,10 +481,10 @@ p {
 }
 
 /* Team Section */
-.Our-team{
-    background-color:#F2F2F7;
-    padding:inherit;
-    margin-top:inherit;
+.Our-team {
+    background-color: #F2F2F7;
+    padding: inherit;
+    margin-top: inherit;
 }
 
 .card {
@@ -517,7 +517,6 @@ p {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .container 
     .bottom {
         flex-direction: column;
         text-align: center;
@@ -530,7 +529,7 @@ p {
 
 /* about us hero img */
 .hero-item {
-    position: absolute;
+    position: initial;
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
@@ -549,7 +548,7 @@ p {
     /* Text Centering */
     .hero-item h1,
     .hero-item h5 {
-        position: absolute;
+        position: relative;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
@@ -595,13 +594,13 @@ p {
 .product-card {
     background: #fff;
     border-radius: 10px;
-    height:fit-content;
+    height: fit-content;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product-card img{
-    width:100%;
-}
+    .product-card img {
+        width: 100%;
+    }
 
 .articles {
     display: flex;
