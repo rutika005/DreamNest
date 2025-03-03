@@ -106,7 +106,6 @@ section.bg-light {
 
 /* Footer Bottom (Merged) */
 .bottom {
-<<<<<<< HEAD
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -250,45 +249,61 @@ section.bg-light {
     padding: 20px;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-}
-
-.gallery-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding: 20px;
     white-space: nowrap;
-    scroll-snap-type: x mandatory;
 }
 
     /* Styling for images */
     .gallery-container img {
-        width: 740px; /* Adjust as needed */
+        width: 100%;
+        max-width: 740px; /* Desktop size */
+        min-width: 250px; /* Mobile pe chhota hoga but readable */
         height: auto;
         border-radius: 10px;
         object-fit: cover;
         scroll-snap-align: start;
     }
 
-    /* Hide scrollbar for a cleaner look */
+    /* Hide scrollbar */
     .gallery-container::-webkit-scrollbar {
         display: none;
     }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .gallery-container img {
+        max-width: 90%; /* Thoda adjust */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-container img {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container img {
+        max-width: 100%;
+        min-width: 250px;
+    }
+}
+
 .services-section {
-    padding: 50px 20px;
+    padding: 40px 15px;
 }
 
     .services-section h2 {
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 10px;
+        text-align: center;
     }
 
     .services-section p {
-        font-size: 16px;
+        font-size: 15px;
         color: #555;
         max-width: 800px;
-        margin: 0 auto 30px;
+        margin: 0 auto 25px;
+        text-align: center;
     }
 
 /* Service Cards Grid */
@@ -303,15 +318,15 @@ section.bg-light {
 /* Individual Service Cards */
 .service-card {
     background: #fff;
-    padding: 20px;
+    padding: 18px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .service-card h3 {
-        font-size: 20px;
-        margin-bottom: 10px;
+        font-size: 18px;
+        margin-bottom: 8px;
         color: #333;
     }
 
@@ -323,9 +338,32 @@ section.bg-light {
 
     /* Hover Effect */
     .service-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
     }
+
+/* Responsive Design */
+@media (max-width: 300px) {
+    .services-section {
+        padding: 30px 10px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 15px;
+    }
+
+        .service-card h3 {
+            font-size: 16px;
+        }
+
+        .service-card p {
+            font-size: 13px;
+        }
+}
 
 
 .social-icons {
@@ -346,13 +384,10 @@ section.bg-light {
         }
 /* Footer Bottom (Merged) */
 .footer-bottom {
-=======
->>>>>>> d585b8e55cdd26432e12961d240f101c4ff4fcff
     display: flex;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-<<<<<<< HEAD
 }
 
     .footer-bottom p {
@@ -367,9 +402,7 @@ section.bg-light {
 
         .footer-bottom a:hover {
             color: white;
-        }
-
-=======
+        
     border-top: 1px solid #555;
     font-size: 14px;
     position: fixed; /* Position fixed at the bottom */
@@ -379,7 +412,6 @@ section.bg-light {
         margin-top: 15px;
     }
 
->>>>>>> d585b8e55cdd26432e12961d240f101c4ff4fcff
 /* Responsive Design */
 @media (max-width: 768px) {
     .newsletter {
@@ -404,7 +436,6 @@ section.bg-light {
     text-align: left;
 }
 
-<<<<<<< HEAD
     .footer h3 {
         font-size: 18px;
     }
@@ -449,6 +480,12 @@ p {
 }
 
 /* Team Section */
+.Our-team{
+    background-color:#F2F2F7;
+    padding:inherit;
+    margin-top:inherit;
+}
+
 .card {
     border: none;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -479,15 +516,109 @@ p {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .container {
-=======
+    .container 
     .bottom {
         flex-direction: column;
->>>>>>> d585b8e55cdd26432e12961d240f101c4ff4fcff
         text-align: center;
     }
 
     .img-fluid {
         margin-bottom: 20px;
     }
+}
+
+/* about us hero img */
+.hero-item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+    .hero-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: brightness(70%);
+    }
+
+    /* Gradient Overlay */
+    .hero-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+    }
+
+    /* Text Centering */
+    .hero-item h1,
+    .hero-item h5 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: white;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .hero-item h1 {
+        top: 30%;
+        font-size: 24px;
+    }
+
+    .hero-item h5 {
+        top: 50%;
+        font-size: 18px;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-item h1 {
+        font-size: 20px;
+    }
+
+    .hero-item h5 {
+        font-size: 16px;
+    }
+}
+/* Blog section */
+.featured-products, .latest-articles {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 10px;
+    height:fit-content;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img{
+    width:100%;
+}
+
+.articles {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.article {
+    width: 300px;
+    text-align: left;
 }
