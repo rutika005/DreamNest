@@ -43,11 +43,11 @@
         </nav>
     </header>
     <div>
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 d-sm-inline-flex justify-content-between">
             @RenderBody()
         </main>
-        @await Html.PartialAsync("_Newsletter")
     </div>
+    @await Html.PartialAsync("_Newsletter")
     @await Html.PartialAsync("_Footer")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
