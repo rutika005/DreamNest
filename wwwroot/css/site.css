@@ -456,11 +456,14 @@ section.bg-light {
             .footer ul li a:hover {
                 color: #ccc;
             }
+            .footer p{
+                color:white;
+            }
 
 /* About Section */
-.aboutus{
+.about-us{
     margin-top:50px;
-    padding:50px;
+    padding:10px 162px 20px 152px;
 }
 h2 {
     font-weight: 700;
@@ -472,6 +475,23 @@ p {
     line-height: 1.6;
 }
 
+@media (max-width: 768px) {
+    .about-us {
+        padding: 10px 0px 10px 10px;
+    }
+    h2 {
+        font-weight: 700;
+        color: #333;
+        text-align:center;
+    }
+
+    p {
+        color: #666;
+        line-height: 1.6;
+        text-align:center;
+    }
+}
+
 /* About Us Image */
 .img-fluid {
     border-radius: 10px;
@@ -481,7 +501,7 @@ p {
 /* Team Section */
 .Our-team {
     background-color: #F2F2F7;
-    padding: inherit;
+    padding: 5px 10px 50px 10px;
     margin-top: inherit;
 }
 
