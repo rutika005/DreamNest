@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\twitter-x.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\images\twitter-x.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\Aesthetica.jpg" />
+    <None Include="wwwroot\images\twitter-x.svg" />
   </ItemGroup>
 
 </Project>
