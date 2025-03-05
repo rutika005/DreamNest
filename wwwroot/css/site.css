@@ -730,3 +730,49 @@ p {
     height: 100%;
     border-radius: 8px;
 }
+
+.career-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.career-text {
+    flex: 1;
+    max-width: 50%;
+}
+
+    .career-text h2 {
+        margin-bottom: 10px;
+    }
+
+    .career-text p {
+        margin-bottom: 15px;
+    }
+
+    .career-text button {
+        display: block;
+    }
+
+.career-grid img {
+    max-width: 40%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .career-grid {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .career-text {
+        max-width: 100%;
+    }
+
+    .career-grid img {
+        max-width: 80%;
+    }
+}
