@@ -12,6 +12,71 @@ html {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+.navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+/*.mx-2 {
+    margin-right: 0.5rem !important;
+    margin-left: 4.5rem !important;
+}*/
+@media (max-width: 702px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: -4.5rem !important;
+    }
+}
+@media (max-width: 575px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 13.5rem !important;
+    }
+}
+@media (max-width: 540px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 12.5rem !important;
+    }
+}
+@media (max-width: 490px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 10.5rem !important;
+    }
+}
+@media (max-width: 430px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 8.5rem !important;
+    }
+}
+@media (max-width: 390px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 7.5rem !important;
+    }
+}
+@media (max-width: 330px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 5.5rem !important;
+    }
+}
+@media (max-width: 290px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 3.5rem !important;
+    }
+}
+@media (max-width: 190px) {
+    .mx-2 {
+        margin-right: 0.5rem !important;
+        margin-left: 7.5rem !important;
+    }
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -134,7 +199,7 @@ section.bg-light {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 1200px; /* Set a reasonable max width */
+    max-width: 1315px; /* Set a reasonable max width */
     height: 650px; /* Adjust height dynamically */
     margin: auto;
     overflow: hidden;
@@ -175,8 +240,9 @@ section.bg-light {
     left: 50%;
     transform: translateX(-50%);
     color: black;
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
+    font-weight: 500;
     padding: 10px 20px;
     border-radius: 5px;
 }
@@ -245,24 +311,26 @@ section.bg-light {
     display: flex;
     overflow-x: auto;
     gap: 15px;
-    padding: 20px;
-    white-space: nowrap;
+    padding: 20px 20px 20px 20px; /* Added left padding of 40px */
     scroll-snap-type: x mandatory;
+    scrollbar-width: none;
 }
 
     /* Styling for images */
     .gallery-container img {
-        width: 740px; /* Adjust as needed */
+        width: 660px; /* Adjust as needed */
         height: auto;
         border-radius: 10px;
         object-fit: cover;
         scroll-snap-align: start;
     }
+        
 
     /* Hide scrollbar for a cleaner look */
     .gallery-container::-webkit-scrollbar {
         display: none;
     }
+
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -496,21 +564,45 @@ p {
 }
 
 /* Team Section */
+/* Team Section */
 .Our-team {
     background-color: #F2F2F7;
-    padding: 5px 10px 50px 10px;
+    padding: 50px 10px; /* Increased top/bottom padding */
     margin-top: inherit;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center cards horizontally */
+    gap: 20px;
+}
+
+.col-md-4 {
+    flex: 0 1 300px; /* Adjust width as needed */
+    max-width: 350px; /* Limit maximum width */
+    display: flex;
+}
+
 .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
     border: none;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 20px; /* Add padding inside the card */
 }
 
     .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
+
+.card-body {
+    text-align: center; /* Center text within the card body */
+}
 
 .card-title {
     font-weight: 600;
@@ -520,6 +612,7 @@ p {
 .card-text {
     font-size: 14px;
     color: #555;
+    margin-bottom: 20px; /* Add space below text */
 }
 
 .card-img-top {
@@ -528,8 +621,21 @@ p {
     object-fit: cover;
     border: 3px solid #ddd;
     padding: 5px;
+    border-radius: 50%; /* Ensure perfect circle */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+    .card-img-top:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+@media (max-width: 768px) {
+    .col-md-4 {
+        flex: 0 1 100%; /* Stack cards vertically */
+        max-width: 100%;
+    }
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
     .bottom {

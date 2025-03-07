@@ -112,31 +112,23 @@
 
 /* Gallery Container (Responsive) */
 .gallery-container {
-    display: flex;
+    display: inline-block;
     overflow-x: auto;
     gap: 15px;
-    padding: 20px;
+    padding: 20px 20px 20px 40px; /* Added left padding of 40px */
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-}
-.gallery-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding: 20px;
-    white-space: nowrap;
-    scroll-snap-type: x mandatory;
 }
 
     /* Styling for images */
     .gallery-container img {
-        width: 740px; /* Adjust as needed */
+        width: 950px; /* Adjust as needed */
         height: auto;
         border-radius: 10px;
         object-fit: cover;
         scroll-snap-align: start;
     }
-
+     
     /* Hide scrollbar for a cleaner look */
     .gallery-container::-webkit-scrollbar {
         display: none;
