@@ -639,7 +639,7 @@ p {
 .author {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     font-weight: bold;
 }
 
