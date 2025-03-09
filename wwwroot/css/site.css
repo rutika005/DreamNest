@@ -959,3 +959,127 @@ section.bg-light {
     transform: translateY(-5px);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
 }
+
+/* Centering Wrapper */
+.contact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* This ensures vertical centering */
+}
+
+/* Main Container */
+.contact-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 800px;
+    width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Centering the Form */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* Ensures text remains left-aligned */
+}
+
+/* Form Container */
+.form-container {
+    flex: 1;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+.char-limit {
+    font-size: 12px;
+    color: gray;
+    margin: 5px 0;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Reset Button */
+.reset-btn {
+    background: white;
+    border: 1px solid black;
+}
+
+/* Submit Button */
+.submit-btn {
+    background: black;
+    color: white;
+}
+
+/* Hover Effects */
+.reset-btn:hover {
+    background: #ddd;
+}
+
+.submit-btn:hover {
+    background: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}

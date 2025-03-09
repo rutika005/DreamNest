@@ -38,9 +38,21 @@ namespace Aesthetica.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Contact()
         {
-            return View();
+            return View(new ContactModel()); // Ensure model binding
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Message = "Your message has been sent successfully!";
+                return View(new ContactModel()); // Clear fields after submission
+            }
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

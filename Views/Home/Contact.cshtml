@@ -1,7 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@model Aesthetica.Models.ContactModel
+
+@{
+    ViewData["Title"] = "Contact Us";
 }
 
-<div>
-    <h1>This is Contact page.</h1>
-    </<div>
+<div class="contact-wrapper">
+    <div class="contact-container">
+        <h2 class="contact-title">Contact Us</h2>
+        <div class="form-container">
+            <form asp-action="Contact" asp-controller="Home" method="post">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" placeholder="Enter your name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+
+                <label asp-for="Email"></label>
+                <input asp-for="Email" placeholder="Enter your email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+
+                <label asp-for="Message"></label>
+                <textarea asp-for="Message" placeholder="Type your message here"></textarea>
+                <span class="text-danger" asp-validation-for="Message"></span>
+
+                <p class="char-limit">Max 500 characters</p>
+
+                <div class="button-group">
+                    <button type="reset" class="reset-btn">Reset</button>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </div>
+            </form>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <p class="text-success">@ViewBag.Message</p>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const resetBtn = document.querySelector(".reset-btn");
+            resetBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevents the default reset behavior
+
+                let form = document.querySelector("form");
+                form.reset(); // Clears the form fields
+
+                // Remove validation error messages
+                let validationErrors = document.querySelectorAll(".text-danger");
+                validationErrors.forEach(error => error.innerText = "");
+
+                // Reset input validation styles (if using Bootstrap validation styles)
+                let inputs = form.querySelectorAll("input, textarea");
+                inputs.forEach(input => {
+                    input.classList.remove("input-validation-error");
+                });
+            });
+        });
+    </script>
+}
