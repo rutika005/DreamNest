@@ -23,3 +23,15 @@
     <div class="gallery-item"><img src="https://abdullahghabayen.com/wp-content/uploads/2023/07/Banner003.jpg " alt="Image 5"></div>
     <div class="gallery-item"><img src="https://5.imimg.com/data5/SELLER/Default/2022/10/AG/YW/MM/147959371/bedroom-interior-designing-service-500x500.jpeg" alt="Image 6"></div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const banner = document.querySelector(".gallery-banner");
+        const images = [...document.querySelectorAll(".gallery-banner img")];
+
+        // Clone images to ensure infinite scrolling effect
+        images.forEach(img => {
+            let clone = img.cloneNode(true);
+            banner.appendChild(clone);
+        });
+    });
+</script>
