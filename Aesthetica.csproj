@@ -19,4 +19,8 @@
     <None Include="wwwroot\images\twitter-x.svg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="6.10.9" />
+  </ItemGroup>
+
 </Project>

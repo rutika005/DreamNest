@@ -121,7 +121,6 @@ section.bg-light {
         color: white;
     }
 
-
 /* Footer Section */
 .footer {
     background: black;
@@ -351,8 +350,6 @@ section.bg-light {
         min-width: 250px;
     }
 }
-
-
 
 .services-section {
     padding: 40px 15px;
@@ -1081,5 +1078,118 @@ button {
     button {
         width: 100%;
         margin-top: 5px;
+    }
+}
+
+/*Register */
+
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* This ensures vertical centering */
+}
+
+/* Container */
+.register-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    align-items:center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+    background: #fff;
+    padding: 40px;
+}
+
+    .left-section h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .left-section p {
+        font-size: 16px;
+        color: #555;
+    }
+
+/* Right Section */
+.right-section {
+    flex: 1;
+    padding: 40px;
+    background: #fafafa;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+small {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-secondary {
+    background: white;
+    color: black;
+    padding: 10px;
+    border: 1px solid black;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Hover Effects */
+.btn-primary:hover {
+    background: #333;
+}
+
+.btn-secondary:hover {
+    background: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
     }
 }
