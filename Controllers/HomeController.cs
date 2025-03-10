@@ -1,16 +1,19 @@
 using System.Diagnostics;
 using Aesthetica.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aesthetica.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;  // Database context instance
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public IActionResult Index()
@@ -38,10 +41,9 @@ namespace Aesthetica.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Contact()
         {
-            return View(new ContactModel()); // Ensure model binding
+            return View();
         }
 
         [HttpPost]
@@ -49,8 +51,10 @@ namespace Aesthetica.Controllers
         {
             if (ModelState.IsValid)
             {
+                _context.contactus.Add(model);  // Insert into database
+                _context.SaveChanges();
                 ViewBag.Message = "Your message has been sent successfully!";
-                return View(new ContactModel()); // Clear fields after submission
+                return View("Contact");
             }
             return View(model);
         }
@@ -59,7 +63,6 @@ namespace Aesthetica.Controllers
         {
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

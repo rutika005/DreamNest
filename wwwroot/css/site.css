@@ -198,7 +198,6 @@ section.bg-light {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 1315px; /* Set a reasonable max width */
     height: 650px; /* Adjust height dynamically */
     margin: auto;
     overflow: hidden;
