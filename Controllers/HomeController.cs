@@ -64,6 +64,20 @@ namespace Aesthetica.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save data to database
+                _context.registeruser.Add(model);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "Home"); // Redirect after successful registration
+            }
+            return View(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
