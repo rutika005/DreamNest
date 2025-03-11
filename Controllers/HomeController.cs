@@ -72,7 +72,7 @@ namespace Aesthetica.Controllers
                 // Save data to database
                 _context.registeruser.Add(model);
                 _context.SaveChanges();
-
+                ViewBag.Message = "Registerd successfully!";
                 return RedirectToAction("Index", "Home"); // Redirect after successful registration
             }
             return View(model);

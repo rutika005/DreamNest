@@ -1,62 +1,36 @@
 ﻿using Aesthetica.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 public class AccountController : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly EmailService _emailService;
 
-    public AccountController(UserManager<IdentityUser> userManager, EmailService emailService)
+    public AccountController(EmailService emailService)
     {
-        _userManager = userManager;
         _emailService = emailService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(RegisterModel model)
+    public IActionResult Register(RegisterModel model)
     {
-        if (!ModelState.IsValid) return View(model);
-
-        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-        var result = await _userManager.CreateAsync(user, model.Password);
-
-        if (result.Succeeded)
+        if (ModelState.IsValid)
         {
-            // Generate Email Confirmation Token
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action("ConfirmEmail", "Account",
-                new { userId = user.Id, token = token }, Request.Scheme);
+            // Define email template file path
+            string bodyFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/templates/EmailTemplate.html");
 
-            var message = $"Please confirm your email by clicking <a href='{confirmationLink}'>here</a>.";
-            await _emailService.SendEmailAsync(user.Email, "Confirm your email", message);
+            // Create placeholders for dynamic values in the email template
+            var placeholders = new Dictionary<string, string>
+        {
+            { "{FullName}", model.Name }
+        };
 
-            return View("CheckYourEmail");
+            // Send the welcome email
+            _emailService.SendEmail("vaghasiyarutika6@gmail.com", model.Email, "Welcome to Aesthetica!", bodyFilePath, placeholders);
+
+            return RedirectToAction("Index", "Home");  // Redirect to home page after successful registration
         }
 
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError("", error.Description);
-        }
         return View(model);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> ConfirmEmail(string userId, string token)
-    {
-        if (userId == null || token == null)
-            return BadRequest("Invalid Email Confirmation Request");
-
-        var user = await _userManager.FindByIdAsync(userId);
-        if (user == null)
-            return NotFound("User not found");
-
-        var result = await _userManager.ConfirmEmailAsync(user, token);
-        if (result.Succeeded)
-            return View("EmailConfirmed");
-
-        return BadRequest("Email Confirmation Failed");
     }
 
 }

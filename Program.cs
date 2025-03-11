@@ -4,6 +4,13 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // Add this using directi
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Bind email settings
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped<UserService>();
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
