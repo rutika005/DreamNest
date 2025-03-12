@@ -26,5 +26,9 @@ namespace Aesthetica.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string Pass { get; set; } // Renamed for clarity
+
+        // ✅ Add these fields for email verification
+        public string? token { get; set; } // Stores the unique token
+        public bool IsVerified { get; set; } = false; // Default value is false
     }
 }

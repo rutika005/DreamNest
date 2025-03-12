@@ -1,4 +1,4 @@
-using Aesthetica.Models;
+﻿using Aesthetica.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // Add this using directive
 
@@ -9,6 +9,8 @@ builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<EmailService>();  // 👈 Add this line
+
 
 
 // Add services to the container.

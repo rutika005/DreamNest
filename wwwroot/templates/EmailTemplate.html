@@ -1,3 +1,27 @@
-﻿<h2>Dear {FullName},</h2>
-<p>Thank you for registering at <b>Aesthetica</b>!</p>
-<p>We are excited to have you onboard.</p>
+﻿<html>
+<head>
+    <style>
+        .email-container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Welcome {Name} to Aesthetica!</h2>
+        <p>Thank you for signing up. Click the button below to verify your email:</p>
+        <a href="{VERIFY_LINK}" class="button">Verify Email</a>
+    </div>
+</body>
+</html>

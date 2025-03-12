@@ -323,12 +323,10 @@ section.bg-light {
         scroll-snap-align: start;
     }
         
-
     /* Hide scrollbar for a cleaner look */
     .gallery-container::-webkit-scrollbar {
         display: none;
     }
-
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -427,7 +425,6 @@ section.bg-light {
             font-size: 13px;
         }
 }
-
 
 .social-icons {
     display: flex;

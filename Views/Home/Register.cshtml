@@ -23,14 +23,12 @@
                 <input asp-for="Password" placeholder="Enter a password" required>
                 <span asp-validation-for="Password" class="text-danger"></span>
 
-                <label asp-for="Pass"></label>
+                <label asp-for="Pass">Confirmed Password</label>
                 <input asp-for="Pass" placeholder="Re-enter your password" required>
                 <span asp-validation-for="Pass" class="text-danger"></span>
 
                 <button type="submit" class="btn-primary">Register</button>
             </form>
-
-
             @if (!string.IsNullOrEmpty(ViewBag.Message))
             {
                 <p class="text-success">@ViewBag.Message</p>
