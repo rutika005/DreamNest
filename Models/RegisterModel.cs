@@ -28,7 +28,7 @@ namespace Aesthetica.Models
         public string Pass { get; set; } // Renamed for clarity
 
         // ✅ Add these fields for email verification
-        public string? token { get; set; } // Stores the unique token
+        public string token { get; set; } // Stores the unique token
         public bool IsVerified { get; set; } = false; // Default value is false
     }
 }

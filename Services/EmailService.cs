@@ -18,15 +18,39 @@ public class EmailService
     // ✅ Load Email Template and Replace Dynamic Content
     private string LoadEmailTemplate(string templateName, Dictionary<string, string> replacements)
     {
-        string path = Path.Combine(Directory.GetCurrentDirectory(), "Views", "EmailTemplates", templateName);
-        string emailBody = File.ReadAllText(path);
-
-        foreach (var item in replacements)
+        try
         {
-            emailBody = emailBody.Replace(item.Key, item.Value);
+            templateName = "EmailTemplate" + ".html";
+            // ✅ Ensure templateName is only a filename, NOT full HTML
+            if (templateName.Contains("<") || templateName.Contains(">"))
+            {
+                throw new ArgumentException("Invalid template name provided.");
+            }
+
+            // ✅ Correct Path
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templates", templateName);
+
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"Email template not found: {path}");
+            }
+
+            string emailBody = File.ReadAllText(path);
+
+            // ✅ Replace placeholders
+            foreach (var replacement in replacements)
+            {
+                emailBody = emailBody.Replace(replacement.Key, replacement.Value);
+            }
+
+            return emailBody;
         }
-        return emailBody;
+        catch (Exception ex)
+        {
+            throw new Exception($"Error loading email template: {ex.Message}");
+        }
     }
+
 
     // ✅ Send Email with Template
     public void SendEmail(int userId, string subject, string templateName, Dictionary<string, string> replacements)
@@ -60,7 +84,8 @@ public class EmailService
 
     private string GetUserEmail(int userId)
     {
-        var user = _context.registeruser.FirstOrDefault(u => u.Id == userId);
+        var user = _context.userregister.FirstOrDefault(u => u.Id == userId);
         return user?.Email ?? "";  
     }
+
 }

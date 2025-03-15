@@ -53,7 +53,7 @@ namespace Aesthetica.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.contactus.Add(model);  // Insert into database
+                _context.contact.Add(model);  // Insert into database
                 _context.SaveChanges();
                 ViewBag.Message = "Your message has been sent successfully!";
                 return View("Contact");
@@ -77,7 +77,7 @@ namespace Aesthetica.Controllers
                 Console.WriteLine("Generated Token: " + model.token);
 
                 // ✅ Save to Database
-                _context.registeruser.Add(model);
+                _context.userregister.Add(model);
                 _context.SaveChanges();
 
                 // ✅ Prepare Verification Link
@@ -89,37 +89,69 @@ namespace Aesthetica.Controllers
                 // ✅ Prepare replacements dictionary
                 var replacements = new Dictionary<string, string>
                 {
-                    { "UserName", model.Name },
-                    { "VerificationLink", verificationLink }
+                    { "{Name}", model.Name },
+                    { "{VERIFY_LINK}", $"https://localhost:7150/Home/VerifyEmail?token={model.token}" }
                 };
 
                 // ✅ Send Email
                 _emailService.SendEmail(model.Id, "Verify Your Email", emailBody, replacements);
+                Console.WriteLine($"Name: {model.Name}, Email: {model.Email}, Token: {model.token}");
 
-                TempData["Message"] = "Registered successfully! Check your email to verify your account.";
-                return RedirectToAction("Register", "Home");
+
+                ViewBag.Message = "Registered successfully! Check your email to verify your account.";
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult Login(string email, string password)
+        //{
+        //    // Check if the user exists in the database
+        //    var user = _context.userregister
+        //        .FirstOrDefault(u => u.Email == email && u.Password == password);
+
+        //    if (user != null)
+        //    {
+        //        // Store user details in session (optional)
+        //        HttpContext.Session.SetString("UserEmail", user.Email);
+        //        HttpContext.Session.SetString("UserName", user.Name);
+
+        //        // Redirect to dashboard or homepage
+        //        return RedirectToAction("Dashboard", "Home");
+        //    }
+        //    else
+        //    {
+        //        // Show error message
+        //        ViewBag.ErrorMessage = "Invalid email or password!";
+        //        return View("Login");
+        //    }
+        //}
 
         public IActionResult VerifyEmail(string token)
         {
-            var user = _context.registeruser.FirstOrDefault(u => u.token == token);
+            var user = _context.userregister
+    .AsEnumerable()
+    .FirstOrDefault(u => !string.IsNullOrEmpty(u.token) && u.token.Equals(token, StringComparison.OrdinalIgnoreCase));
+
             if (user != null)
             {
                 user.IsVerified = true;
-                user.token = null; // Token null kar do, taki dobara use na ho
+                user.token = null;  // ✅ Mark as used
                 _context.SaveChanges();
-                TempData["Message"] = "Email verified successfully!";
+                TempData["Message"] = "Email verified successfully.";
             }
             else
             {
                 TempData["Message"] = "Invalid or expired token.";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
