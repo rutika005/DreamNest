@@ -20,8 +20,13 @@ namespace Aesthetica.Controllers
 
         public IActionResult Index()
         {
+            //if (HttpContext.Session.GetString("Id") != null)
+            //{
+            //    return RedirectToAction("Index", "User");
+            //}
             return View();
         }
+
 
         public IActionResult AboutUs()
         {
@@ -107,40 +112,35 @@ namespace Aesthetica.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Login(string email, string password)
-        //{
-        //    // Check if the user exists in the database
-        //    var user = _context.userregister
-        //        .FirstOrDefault(u => u.Email == email && u.Password == password);
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+            // Check if the user exists in the database
+            var user = _context.userregister
+                .FirstOrDefault(u => u.Email == email && u.Pass == password);
 
-        //    if (user != null)
-        //    {
-        //        // Store user details in session (optional)
-        //        HttpContext.Session.SetString("UserEmail", user.Email);
-        //        HttpContext.Session.SetString("UserName", user.Name);
-
-        //        // Redirect to dashboard or homepage
-        //        return RedirectToAction("Dashboard", "Home");
-        //    }
-        //    else
-        //    {
-        //        // Show error message
-        //        ViewBag.ErrorMessage = "Invalid email or password!";
-        //        return View("Login");
-        //    }
-        //}
+            if (user != null)
+            {
+                // If login is successful, redirect to User Panel
+                return RedirectToAction("Index", "User"); // Change "Home" to your User Controller
+            }
+            else
+            {
+                // Invalid login: Show error message
+                ViewBag.Message = "Invalid email or password!";
+                return View();
+            }
+        }
 
         public IActionResult VerifyEmail(string token)
         {
             var user = _context.userregister
-    .AsEnumerable()
-    .FirstOrDefault(u => !string.IsNullOrEmpty(u.token) && u.token.Equals(token, StringComparison.OrdinalIgnoreCase));
+            .AsEnumerable()
+            .FirstOrDefault(u => !string.IsNullOrEmpty(u.token) && u.token.Equals(token, StringComparison.OrdinalIgnoreCase));
 
             if (user != null)
             {
                 user.IsVerified = true;
-                user.token = null;  // ✅ Mark as used
                 _context.SaveChanges();
                 TempData["Message"] = "Email verified successfully.";
             }
@@ -155,6 +155,11 @@ namespace Aesthetica.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Forgotpass()
+        {
+            return View();
         }
     }
 }

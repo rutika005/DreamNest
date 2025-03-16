@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>User Panel</title>
+    <link href="~/css/User.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="@Url.Action("Dashboard", "UserPanel")">Dashboard</a></li>
+            <li><a href="@Url.Action("Profile", "UserPanel")">Profile</a></li>
+            <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿
+﻿@model Aesthetica.Models.LoginModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -14,20 +14,27 @@
 <div class="Login-container">
     <h2 class="title">Login</h2>
     <p class="subtitle">Enter your credentials to access your account</p>
+    <br />
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <p style="color: red;">@ViewBag.Message</p>
+    }
 
     <form method="post" asp-action="Login" asp-controller="Home">
         <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required placeholder="Enter your email">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" required placeholder="Enter your email">
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required placeholder="Enter your password">
+            <label asp-for="Pass">Password</label>
+            <input asp-for="Pass" required placeholder="Enter your password">
+            <span asp-validation-for="Pass" class="text-danger"></span>
         </div>
 
         <div class="button-group">
-            <a href="/../Views/Home/Login.cshtml" class="btn-outline">Forgot Password?</a>
+            <bu href="/Home/Forgotpass" class="btn-outline">Forgot Password?</bu>
             <button type="submit" class="btn-primary">Login</button>
         </div>
     </form>

@@ -27,14 +27,14 @@
                 <input asp-for="Pass" placeholder="Re-enter your password" required>
                 <span asp-validation-for="Pass" class="text-danger"></span>
                 <br /><br />
-                    @* <a href="/Home/Login" class="btn-outline">Already have an account? Sign in</a> *@
+                    <a href="/Home/Login" class="btn-outline">Already have an account? Sign in</a> 
                     <button type="submit" class="btn-primary">Register</button>
                 
             </form>
 
         @if (!string.IsNullOrEmpty(ViewBag.Message))
         {
-            <p class="text-success">@ViewBag.Message</p>
+            <p style="color: green;">@ViewBag.Message</p>
         }
 
         </div>

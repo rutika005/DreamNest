@@ -8,9 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<EmailService>();  // 👈 Add this line
+builder.Services.AddScoped<UserService>();   // User Services
+builder.Services.AddScoped<EmailService>();  // Email Services
 
+// Add session services
+builder.Services.AddDistributedMemoryCache(); // ✅ Required for session storage
+builder.Services.AddSession(); // ✅ Enable session services
+
+builder.Services.AddControllersWithViews(); // Keep your existing services
 
 
 // Add services to the container.
@@ -38,6 +43,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Enable session middleware
+app.UseSession(); // ✅ Add this before `app.UseAuthorization()`
 
 app.MapControllerRoute(
     name: "default",
