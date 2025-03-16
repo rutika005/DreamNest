@@ -69,8 +69,7 @@ namespace Aesthetica.Controllers
         [HttpPost]
         public IActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
-            {
+            
                 // ✅ Random token generate karo
                 model.token = Guid.NewGuid().ToString(); // Unique token generate karega
                 model.IsVerified = false; // Default false
@@ -100,8 +99,7 @@ namespace Aesthetica.Controllers
 
                 ViewBag.Message = "Registered successfully! Check your email to verify your account.";
                 return RedirectToAction("Index", "Home");
-            }
-            return View(model);
+            
         }
 
         public IActionResult Login()
