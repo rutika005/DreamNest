@@ -1,0 +1,26 @@
+﻿@model Aesthetica.Models.ResetpassModel
+
+@{
+    ViewData["Title"] = "ResetPass";
+}
+'
+
+<div class="Login-container">
+    <form asp-action="ResetPass" asp-controller="Home" method="post">
+            <div class="input-group">
+                <input type="hidden" asp-for="Token" />
+
+                <label>New Password:</label>
+                <input asp-for="NewPassword" required />
+
+                <label asp-for="Pass">Confirm Password:</label>
+                <input asp-for="Pass" required />
+
+            <button type="submit" class="btn-primary">Reset Password</button>
+            </div>
+    </form>
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <p style="color: red;">@ViewBag.Message</p>
+    }
+</div>

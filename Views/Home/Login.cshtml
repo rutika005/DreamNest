@@ -29,13 +29,13 @@
 
         <div class="input-group">
             <label asp-for="Pass">Password</label>
-            <input asp-for="Pass" required placeholder="Enter your password">
+            <input asp-for="Pass" type="password" name="password" required placeholder="Enter your password">
             <span asp-validation-for="Pass" class="text-danger"></span>
         </div>
 
         <div class="button-group">
-            <bu href="/Home/Forgotpass" class="btn-outline">Forgot Password?</bu>
-            <button type="submit" class="btn-primary">Login</button>
+            <a href="/Home/Forgotpass" class="btn-outline">Forgot Password?</a>
+            <button type="submit" class="btn-primary" href="@Url.Action("Index", "User")">Login</button>
         </div>
     </form>
 </div>

@@ -42,7 +42,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 // Enable session middleware
 app.UseSession(); // ✅ Add this before `app.UseAuthorization()`

@@ -1,7 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 using Aesthetica.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Aesthetica.Controllers
 {
@@ -10,12 +13,14 @@ namespace Aesthetica.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _context;  // Database context instance
         private readonly EmailService _emailService;  // Email service instance
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext context, EmailService emailService)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context, EmailService emailService, IConfiguration configuration)
         {
             _logger = logger;
             _context = context;
             _emailService = emailService;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -75,22 +80,22 @@ namespace Aesthetica.Controllers
         public IActionResult Register(RegisterModel model)
         {
             
-                // ✅ Random token generate karo
+                //  Random token generate karo
                 model.token = Guid.NewGuid().ToString(); // Unique token generate karega
                 model.IsVerified = false; // Default false
                 Console.WriteLine("Generated Token: " + model.token);
 
-                // ✅ Save to Database
+                //  Save to Database
                 _context.userregister.Add(model);
                 _context.SaveChanges();
 
-                // ✅ Prepare Verification Link
+                //  Prepare Verification Link
                 string verificationLink = Url.Action("VerifyEmail", "Home", new { model.token }, Request.Scheme);
 
-                // ✅ Email Body
+                //  Email Body
                 string emailBody = $"<h2>Welcome, {model.Name}!</h2><p>Please verify your email by clicking <a href='{verificationLink}'>here</a>.</p>";
 
-                // ✅ Prepare replacements dictionary
+                //  Prepare replacements dictionary
                 var replacements = new Dictionary<string, string>
                 {
                     { "{Name}", model.Name },
@@ -103,7 +108,7 @@ namespace Aesthetica.Controllers
 
 
                 ViewBag.Message = "Registered successfully! Check your email to verify your account.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Register", "Home");
             
         }
 
@@ -115,21 +120,31 @@ namespace Aesthetica.Controllers
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            // Check if the user exists in the database
-            var user = _context.userregister
-                .FirstOrDefault(u => u.Email == email && u.Pass == password);
+            Console.WriteLine($"Entered Email: {email}");
+            Console.WriteLine($"Entered Password: {password}");
 
-            if (user != null)
+            var user = _context.userregister.FirstOrDefault(u => u.Email == email);
+
+            if (user == null)
             {
-                // If login is successful, redirect to User Panel
-                return RedirectToAction("Index", "User"); // Change "Home" to your User Controller
-            }
-            else
-            {
-                // Invalid login: Show error message
-                ViewBag.Message = "Invalid email or password!";
+                Console.WriteLine("Email not found in database!");
+                ViewBag.Message = "Email not found!";
                 return View();
             }
+
+            Console.WriteLine($"Stored Password from DB: {user.Pass}");
+
+            if (user.Pass.Trim() != password.Trim())
+            {
+                Console.WriteLine("Incorrect password!");
+                ViewBag.Message = "Incorrect password!";
+                return View();
+            }
+
+            HttpContext.Session.SetString("UserEmail", user.Email);
+            HttpContext.Session.SetString("UserName", user.Name);
+
+            return RedirectToAction("Index", "User");
         }
 
         public IActionResult VerifyEmail(string token)
@@ -160,6 +175,103 @@ namespace Aesthetica.Controllers
         public IActionResult Forgotpass()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Forgotpass(ForgotpassModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = _context.userregister.FirstOrDefault(u => u.Email == model.Email);
+
+            if (user == null)
+            {
+                ViewBag.Message = "User not found.";
+                return View();
+            }
+
+            // Generate a new token
+            var newToken = Guid.NewGuid().ToString();
+
+            // Overwrite the existing token and update expiry time
+            user.token = newToken;
+            user.ResetTokenExpiry = DateTime.UtcNow.AddHours(1);
+
+            _context.SaveChanges();
+
+            // ✅ Generate the reset link
+            string resetLink = Url.Action("Resetpass", "Home", new { token = newToken }, Request.Scheme);
+
+            //  Prepare replacements dictionary
+            var replacements = new string[] { "{VERIFY_LINK}", $"https://localhost:7150/Home/Resetpass?token={user.token = newToken}" };
+
+            // ✅ Call the email sending function
+            await SendResetEmail(user.Email, replacements[1]);
+
+            ViewBag.Message = "Password reset link has been sent to your email.";
+            return View();
+        }
+
+
+        [HttpPost]
+        private async Task SendResetEmail(string email, string resetLink)
+        {
+            var smtpClient = new SmtpClient(_configuration["EmailSettings:SMTPServer"])
+            {
+                Port = int.Parse(_configuration["EmailSettings:SMTPPort"]),
+                Credentials = new NetworkCredential(
+                _configuration["EmailSettings:SMTPUsername"],
+                _configuration["EmailSettings:SMTPPassword"]
+            ),
+                EnableSsl = true
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(_configuration["EmailSettings:SMTPUsername"]),
+                Subject = "Reset Your Password",
+                Body = $"<p>Click <a href='{resetLink}'>here</a> to reset your password.</p>",
+                IsBodyHtml = true
+            };
+
+            mailMessage.To.Add(email);
+            smtpClient.Send(mailMessage);
+        }
+
+        public IActionResult Resetpass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Resetpass(ResetpassModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _context.userregister.FirstOrDefaultAsync(u => u.token == model.Token && u.ResetTokenExpiry > DateTime.UtcNow);
+
+            if (user == null)
+            {
+                ViewBag.Message = "Invalid or expired token.";
+                return View();
+            }
+
+            // Update the password
+            _context.Entry(user).Property(u => u.Pass).IsModified = true;
+            _context.Entry(user).Property(u => u.token).IsModified = true;
+            //user.token = null; // Clear token
+            user.ResetTokenExpiry = null;
+
+            await _context.SaveChangesAsync();
+
+            ViewBag.Message = "Password successfully reset! You can now login.";
+            return RedirectToAction("Login");
         }
     }
 }
