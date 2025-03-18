@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Aesthetica</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
-    @* <link rel="stylesheet" href="~/Aesthetica.styles.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/Aesthetica.styles.css" asp-append-version="true" />
     <link href="~/css/User.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
@@ -21,10 +21,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Style">Style</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Budget">Budget</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Measure">Measure</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Careers">Careers</a>
                         </li>
                     </ul>
                     <button class="btn custom-register" onclick="window.location.href='@Url.Action("Logout", "User")';">Logout</button>

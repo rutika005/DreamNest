@@ -16,5 +16,10 @@ namespace Aesthetica.Controllers
             return RedirectToAction("Index", "Home"); // return toguest panel
         }
 
+        public IActionResult Blog()
+        {
+            return View();
+        }
+
     }
 }
