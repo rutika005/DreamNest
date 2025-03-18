@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="room-measurement">
+    <h2>Room Measurement</h2>
+    <div class="room-container">
+        <!-- Left: Room Image -->
+        <div class="room-image">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Room">
+        </div>
+
+        <!-- Right: Form for Room Dimensions -->
+        <div class="room-form">
+            <h3>Room Dimensions</h3>
+            <label>Length (ft)</label>
+            <input type="number" id="length" placeholder="Enter Length">
+
+            <label>Width (ft)</label>
+            <input type="number" id="width" placeholder="Enter Width">
+
+            <label>Height (ft)</label>
+            <input type="number" id="height" placeholder="Enter Height">
+
+            <button class="room-btn" onclick="calculateSpace()">Calculate Space</button>
+
+            <p id="result"></p>
+        </div>
+    </div>
+</section>
+
+<script>
+    function calculateSpace() {
+        let length = parseFloat(document.getElementById("length").value) || 0;
+        let width = parseFloat(document.getElementById("width").value) || 0;
+        let height = parseFloat(document.getElementById("height").value) || 0;
+        let volume = length * width * height;
+
+        document.getElementById("result").innerText = `Room Space: ${volume} cubic feet`;
+    }
+</script>

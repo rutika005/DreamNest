@@ -226,6 +226,10 @@
             color: white;
         }
 
+        .footer h3{
+            color:#fff;
+        }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .newsletter {
@@ -568,5 +572,135 @@ input[type="range"] {
     to {
         opacity: 0;
         bottom: 20px;
+    }
+}
+
+.room-measurement {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.room-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.room-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.room-form {
+    width: 50%;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+    .room-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    .room-form input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.room-btn {
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .room-btn:hover {
+        background: #444;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .room-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .room-form {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/*Job*/
+
+.job-listings {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.job h2 {
+    color: #1a1a1a;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.job-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.job-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+    .job-card h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .job-card p {
+        color: #666;
+        margin: 5px 0;
+    }
+
+    .job-card a {
+        display: inline-block;
+        color: #0066ff;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+        .job-card a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .job-container {
+        grid-template-columns: 1fr;
     }
 }
