@@ -471,21 +471,54 @@ section.bg-light {
     margin-top: 15px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .newsletter {
-        text-align: center;
-        flex-direction: column;
+/* Newsletter Section */
+.bg-light {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+    .bg-light h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 
-    .newsletter-text {
+    .bg-light p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .bg-light .form-control {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .bg-light .btn-dark {
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bg-light .container {
         max-width: 100%;
     }
 
-    .footer {
-        text-align: center;
+    .bg-light .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bg-light .col-md-4,
+    .bg-light .col-md-2 {
+        width: 80%;
+        margin-bottom: 10px;
     }
 }
+
 /* Footer Section */
 .footer {
     background: black;
@@ -517,12 +550,12 @@ section.bg-light {
             .footer p{
                 color:white;
             }
-
 /* About Section */
-.about-us{
-    margin-top:50px;
-    padding:10px 162px 20px 152px;
+.about-us {
+    margin-top: 50px;
+    padding: 10px 162px 20px 152px;
 }
+
     .about-us h2 {
         font-weight: 700;
         color: #333;
@@ -532,34 +565,96 @@ section.bg-light {
         color: #666;
         line-height: 1.6;
     }
-    .about-us row {
+
+    .about-us .col {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center; /* Center cards horizontally */
+        justify-content: center;
         gap: 20px;
+        flex-direction: row;
     }
 
-    @media (max-width: 768px) {
-        .about-us {
-        padding: 10px 0px 10px 10px;
+@media (max-width: 1000px) {
+    .about-us .row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-        .about-us h2 {
-            font-weight: 700;
-            color: #333;
-            text-align: center;
-        }
-
-        .about-us p {
-            color: #666;
-            line-height: 1.6;
-            text-align: center;
-        }
 }
 
 /* About Us Image */
 .img-fluid {
     border-radius: 10px;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Team Section */
+.Our-team {
+    margin-top: 50px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+    .Our-team .card {
+        margin: 20px auto;
+        max-width: 350px;
+        padding: 20px;
+    }
+
+        .Our-team .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .about-us {
+        padding: 20px;
+    }
+
+        .about-us .row {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-us img {
+            max-width: 80%;
+            margin-bottom: 20px;
+        }
+}
+
+@media (max-width: 768px) {
+    .about-us {
+        padding: 10px;
+    }
+
+        .about-us h2, .about-us p {
+            text-align: center;
+        }
+
+    .Our-team .row {
+        flex-direction: column;
+    }
+
+    .Our-team .card {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us img {
+        max-width: 100%;
+    }
+
+    .Our-team .card img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 /* Team Section */
@@ -822,12 +917,16 @@ section.bg-light {
 .gallery-header {
     text-align: center;
     padding: 40px 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 .gallery-container {
     width: 100%;
     overflow: hidden;
     position: relative;
     padding: 20px 0;
+    overflow-x: auto;
 }
 
 .gallery-banner {
@@ -908,6 +1007,13 @@ section.bg-light {
     flex-wrap: wrap;
     margin-top:inherit;
 }
+@media (max-width: 672px) {
+    .row {
+        display: block;
+    }
+}
+
+
 
 /* Article Card */
 .career-card {
@@ -923,6 +1029,7 @@ section.bg-light {
     text-align: left;
 }
 
+
     /* Image Styling */
     .career-card img {
         width: 100px;
@@ -932,6 +1039,16 @@ section.bg-light {
         margin-right: 15px;
     }
 
+@media (max-width: 356px) {
+    .career-card {
+        display: block;
+    }
+    .career-card img{
+        width: 100%;
+        height: 30%;
+        border-radius: 20px;
+    }
+}
 /* Article Content */
 .card-content {
     flex: 1;
@@ -963,7 +1080,7 @@ section.bg-light {
 
 /* Main Container */
 .contact-container {
-    display: flex;
+    display: flow;
     align-items: center;
     gap: 40px;
     max-width: 800px;
@@ -975,10 +1092,13 @@ section.bg-light {
 
 /* Centering the Form */
 .contact-container {
-    display: flex;
+    display: flow;
     justify-content: center;
     align-items: center;
     text-align: left; /* Ensures text remains left-aligned */
+}
+.aa{
+    text-align: center;
 }
 
 /* Form Container */
@@ -998,6 +1118,7 @@ label {
     font-size: 14px;
     font-weight: bold;
     margin-top: 10px;
+    text-align: left;
 }
 
 input, textarea {
