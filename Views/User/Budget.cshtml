@@ -15,11 +15,11 @@
                 </div>
                 <div class="budget-item">
                     <span>Spent</span>
-                    <strong id="spent-amount">$0</strong>
+                    <strong id="spent-amount">₹0</strong>
                 </div>
                 <div class="budget-item">
                     <span>Remaining</span>
-                    <strong id="remaining-amount" class="remaining-amount">$0</strong>
+                    <strong id="remaining-amount" class="remaining-amount">₹0</strong>
                 </div>
             </div>
         </div>
@@ -30,22 +30,22 @@
             <div class="expense-item">
                 <span>Furniture</span>
                 <input type="range" id="furniture-slider" min="0" value="0" oninput="updateExpenses()">
-                <strong id="furniture-amount">$0</strong>
+                <strong id="furniture-amount">₹0</strong>
             </div>
             <div class="expense-item">
                 <span>Decor</span>
                 <input type="range" id="decor-slider" min="0" value="0" oninput="updateExpenses()">
-                <strong id="decor-amount">$0</strong>
+                <strong id="decor-amount">₹0</strong>
             </div>
             <div class="expense-item">
                 <span>Labor</span>
                 <input type="range" id="labor-slider" min="0" value="0" oninput="updateExpenses()">
-                <strong id="labor-amount">$0</strong>
+                <strong id="labor-amount">₹0</strong>
             </div>
             <div class="expense-item">
                 <span>Materials</span>
                 <input type="range" id="materials-slider" min="0" value="0" oninput="updateExpenses()">
-                <strong id="materials-amount">$0</strong>
+                <strong id="materials-amount">₹0</strong>
             </div>
         </div>
     </div>
@@ -72,12 +72,12 @@
         let spent = furniture + decor + labor + materials;
         let remaining = totalBudget - spent;
 
-        document.getElementById("furniture-amount").innerText = `$${furniture}`;
-        document.getElementById("decor-amount").innerText = `$${decor}`;
-        document.getElementById("labor-amount").innerText = `$${labor}`;
-        document.getElementById("materials-amount").innerText = `$${materials}`;
+        document.getElementById("furniture-amount").innerText = `₹${furniture}`;
+        document.getElementById("decor-amount").innerText = `₹${decor}`;
+        document.getElementById("labor-amount").innerText = `₹${labor}`;
+        document.getElementById("materials-amount").innerText = `₹${materials}`;
 
-        document.getElementById("spent-amount").innerText = `$${spent}`;
-        document.getElementById("remaining-amount").innerText = `$${remaining}`;
+        document.getElementById("spent-amount").innerText = `₹${spent}`;
+        document.getElementById("remaining-amount").innerText = `₹${remaining}`;
     }
 </script>

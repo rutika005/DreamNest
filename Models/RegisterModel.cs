@@ -1,5 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 
 namespace Aesthetica.Models
 {
@@ -25,12 +29,16 @@ namespace Aesthetica.Models
         [Required(ErrorMessage = "Confirm Password is required")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
-        public string Pass { get; set; } // Renamed for clarity
+        public string Pass { get; set; }
 
-        //  Add these fields for email verification
-        public string token { get; set; } // Stores the unique token
-        public bool IsVerified { get; set; } = false; // Default value is false
+        public string token { get; set; }
+        public bool IsVerified { get; set; } = false;
 
         public DateTime? ResetTokenExpiry { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        public string role { get; set; }
+
     }
 }

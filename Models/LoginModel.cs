@@ -14,5 +14,6 @@ namespace Aesthetica.Models
         [Required(ErrorMessage = "Confirm Password is required")]
         [DataType(DataType.Password)]
         public string Pass { get; set; } // Renamed for clarity
+
     }
 }
