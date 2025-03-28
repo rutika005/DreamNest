@@ -4069,7 +4069,7 @@ textarea.form-control-lg {
 
 
 
-    @media (max-width: 576px) {
+    @media (max-width: 638px) {
         .navbar-expand-sm {
             flex-wrap: nowrap;
             justify-content: flex-start;

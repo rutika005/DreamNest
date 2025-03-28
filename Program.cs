@@ -1,8 +1,22 @@
-using Aesthetica.Models;
+﻿using Aesthetica.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Bind email settings
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped<UserService>();   // User Services
+builder.Services.AddScoped<EmailService>();  // Email Services
+
+// Add session services
+builder.Services.AddDistributedMemoryCache(); // ✅ Required for session storage
+builder.Services.AddSession(); // ✅ Enable session services
+
+builder.Services.AddControllersWithViews(); // Keep your existing services
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -11,6 +25,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     new MySqlServerVersion(new Version(8, 0, 21)))); // UseMySql instead of UseMySQL
+
 
 var app = builder.Build();
 
@@ -27,7 +42,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
+
+// Enable session middleware
+app.UseSession(); // ✅ Add this before `app.UseAuthorization()`
 
 app.MapControllerRoute(
     name: "default",

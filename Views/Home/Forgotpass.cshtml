@@ -1,0 +1,25 @@
+﻿@model Aesthetica.Models.ForgotpassModel
+
+@{
+    ViewData["Title"] = "Forgot Password";
+
+}
+
+<div class="Login-container">
+    <h2 class="title">Forgot Password</h2>
+    <p class="subtitle">Enter your credentials to access your account</p>
+    <br />
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <p style="color: red;">@ViewBag.Message</p>
+    }
+
+    <form method="post" asp-action="Forgotpass" asp-controller="Home">
+        <div class="input-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" required placeholder="Enter your email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+            <button type="submit" class="btn-primary">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,706 @@
+﻿.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Set a reasonable max width */
+    height: 650px; /* Adjust height dynamically */
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Each slide */
+.slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+    /* Image Styling */
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Gradient Overlay */
+    .slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+    }
+
+/* Text Overlay */
+.text-overlay {
+    position: inherit;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Slideshow Animation */
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Apply animation to slides */
+.slide:nth-child(1) {
+    animation: fade 12s infinite 0s;
+}
+
+.slide:nth-child(2) {
+    animation: fade 12s infinite 4s;
+}
+
+.slide:nth-child(3) {
+    animation: fade 12s infinite 8s;
+}
+
+.slide:nth-child(4) {
+    animation: fade 12s infinite 12s;
+}
+
+/* Make the slideshow responsive */
+@media (max-width: 768px) {
+    .slideshow-container {
+        height: 350px; /* Adjust height for smaller screens */
+    }
+
+    .text-overlay {
+        font-size: 1.5rem;
+        bottom: 5%;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slideshow-container {
+        height: 280px; /* Further reduce height on very small screens */
+    }
+
+    .text-overlay {
+        font-size: 1.2rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Gallery Container (Responsive) */
+.gallery-container {
+    display: inline-block;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px 20px 20px 40px; /* Added left padding of 40px */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+    /* Styling for images */
+    .gallery-container img {
+        width: 950px; /* Adjust as needed */
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
+        scroll-snap-align: start;
+    }
+
+    /* Hide scrollbar for a cleaner look */
+    .gallery-container::-webkit-scrollbar {
+        display: none;
+    }
+
+.services-section {
+    padding: 50px 20px;
+}
+
+    .services-section h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .services-section p {
+        font-size: 16px;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto 30px;
+    }
+
+/* Service Cards Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Individual Service Cards */
+.service-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .service-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .service-card p {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    /* Hover Effect */
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+    .social-icons a {
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        transition: transform 0.3s ease;
+    }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+/* Footer Bottom (Merged) */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+    .footer-bottom p {
+        font-size: 14px;
+        color: #bbb;
+    }
+
+    .footer-bottom a {
+        color: #bbb;
+        text-decoration: none;
+    }
+
+        .footer-bottom a:hover {
+            color: white;
+        }
+
+        .footer h3{
+            color:#fff;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .newsletter {
+        text-align: center;
+        padding: 10ox;
+        flex-direction: column;
+    }
+     
+    .newsletter-text {
+        max-width: 100%;
+    }
+
+    .footer {
+        text-align: center;
+    }
+}
+/* Footer Section */
+.footer {
+    background: black;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    text-align: left;
+}
+
+    .footer h3 {
+        font-size: 18px;
+    }
+
+    .footer ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+            .footer ul li a:hover {
+                color: #ccc;
+            }
+
+
+.blog-banner {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+    .blog-banner img {
+        width: 100%;
+        height: auto;
+    }
+
+.blog-title {
+    position: absolute;
+    bottom: 0px;
+    width:inherit;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.blog-list {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.blog-card {
+    width: 30%;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+    .blog-card img {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+@media (max-width: 768px) {
+    .blog-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .blog-card {
+        width: 90%;
+    }
+}
+
+.blog-content {
+    text-align: left;
+}
+
+.blog-head {
+    text-align:left;
+}
+
+.blog-type{
+    text-align:left;
+    color:coral;
+}
+
+/* Section Styling */
+.style-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+}
+
+    .style-section h2 {
+        color: #1a1a1a;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+/* Style Container */
+.style-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Individual Card */
+.style-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .style-card:hover {
+        transform: scale(1.05);
+    }
+
+    .style-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+.style-content {
+    padding: 15px;
+}
+
+    .style-content h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .style-content p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+.explore-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .style-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .style-card {
+        width: 90%;
+    }
+}
+
+
+
+/* Section Styling */
+.budget-planner {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+}
+
+    .budget-planner h2 {
+        color: #1a1a1a;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+/* Container */
+.budget-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Project Overview */
+.project-overview,
+.expense-categories {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 320px;
+    text-align: left;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Budget Details */
+.budget-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.budget-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.budget-amount {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.remaining-amount {
+    color: #ff6600;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+
+/* Expense Categories */
+.expense-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+    .expense-item span {
+        font-size: 14px;
+        color: #333;
+    }
+
+.progress-bar {
+    width: 100px;
+    height: 6px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.progress {
+    height: 100%;
+    background: #1a237e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .budget-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project-overview,
+    .expense-categories {
+        width: 90%;
+    }
+}
+
+/* Snackbar Styles */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 5px;
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    z-index: 1;
+}
+
+    #snackbar.show {
+        visibility: visible;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        bottom: 20px;
+    }
+
+    to {
+        opacity: 1;
+        bottom: 30px;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        bottom: 30px;
+    }
+
+    to {
+        opacity: 0;
+        bottom: 20px;
+    }
+}
+
+.room-measurement {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.room-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.room-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.room-form {
+    width: 50%;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+    .room-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    .room-form input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.room-btn {
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .room-btn:hover {
+        background: #444;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .room-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .room-form {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/*Job*/
+
+.job-listings {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.job h2 {
+    color: #1a1a1a;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.job-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.job-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+    .job-card h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .job-card p {
+        color: #666;
+        margin: 5px 0;
+    }
+
+    .job-card a {
+        display: inline-block;
+        color: #0066ff;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+        .job-card a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .job-container {
+        grid-template-columns: 1fr;
+    }
+}

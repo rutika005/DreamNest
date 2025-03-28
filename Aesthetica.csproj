@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.11.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="MySql.Data" Version="6.10.9" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
   </ItemGroup>

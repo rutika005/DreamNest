@@ -1,0 +1,236 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@* <h2>Welcome, @ViewBag.UserName!</h2> *@
+
+<section class="blog-banner">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Interior Design">
+    <div class="blog-title">
+        <h2>2024 Interior Design Trends You Need to Know</h2>
+        <p>By Sarah Johnson • 10 min read</p>
+    </div>
+</section>
+<br />
+
+
+<section class="blog-list">
+    <div class="blog-card">
+        <img src="https://cdn.sanity.io/images/fud515dx/production/24026e1fbb2f92b0d266fa701eed8d1387067cb6-5760x3240.jpg?q=80" alt="Small Space Solutions"><br /><br />
+        <div class="blog-content">
+            <span class="blog-type">Tips</span><br /><br />
+            <h3 class="blog-head">Small Space Solutions: Maximizing Your Home</h3>
+            <p>Discover clever ways to make the most of limited space with these expert tips.</p>
+        </div>
+    </div>
+
+    <div class="blog-card">
+        <img src="https://www.hindustantimes.com/ht-img/img/2023/08/26/550x309/spacejoy-YqFz7UMm8qE-unsplash_1693020511390_1693022466867.jpg" alt="Color Psychology"><br /><br />
+        <div class="blog-content">
+            <span class="blog-type">Color Guide</span><br /><br />
+            <h3 class="blog-head">Color Psychology in Interior Design</h3>
+            <p>Learn how different colors can affect mood and atmosphere in your space.</p>
+        </div>
+    </div>
+
+    <div class="blog-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Scandinavian Design"><br /><br />
+        <div class="blog-content">
+            <span class="blog-type">Inspiration</span><br /><br />
+            <h3 class="blog-head">Scandinavian Design Elements</h3>
+            <p>Explore the key elements that make Scandinavian design so appealing.</p>
+        </div>
+    </div>
+</section>
+@* Style Section *@
+<section class="style-section">
+    <h2>Find Your Style</h2>
+    <div class="style-container">
+        <div class="style-card">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2024/7/435014576/YP/PM/NO/210303379/sustainable-home-decor.jpg" alt="Modern Style">
+            <div class="style-content">
+                <h3>Modern</h3>
+                <p>Clean lines, minimal decor, and contemporary aesthetics</p>
+                <a href="#" class="explore-link">Explore Style →</a>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://malvigajjar.com/wp-content/uploads/2023/06/How-Color-Psychology-Transforms-Interior-spaces-1024x711.webp" alt="Classic Style">
+            <div class="style-content">
+                <h3>Classic</h3>
+                <p>Timeless elegance with traditional elements</p>
+                <a href="#" class="explore-link">Explore Style →</a>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Scandinavian Style">
+            <div class="style-content">
+                <h3>Scandinavian</h3>
+                <p>Light, airy spaces with natural materials</p>
+                <a href="#" class="explore-link">Explore Style →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Budget Planner *@
+
+<section class="budget-planner">
+    <h2>Budget Planner</h2>
+    <div class="budget-container">
+        <!-- Project Overview -->
+        <div class="project-overview">
+            <h3>Project Overview</h3>
+            <div class="budget-details">
+                <div class="budget-item">
+                    <span>Total Budget</span>
+                    <input type="number" id="total-budget" placeholder="Enter Total Budget" oninput="updateBudget()">
+                </div>
+                <div class="budget-item">
+                    <span>Spent</span>
+                    <strong id="spent-amount">$0</strong>
+                </div>
+                <div class="budget-item">
+                    <span>Remaining</span>
+                    <strong id="remaining-amount" class="remaining-amount">$0</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Categories with Progress Bars -->
+        <div class="expense-categories">
+            <h3>Expense Categories</h3>
+            <div class="expense-item">
+                <span>Furniture</span>
+                <input type="range" id="furniture-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="furniture-amount">$0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Decor</span>
+                <input type="range" id="decor-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="decor-amount">$0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Labor</span>
+                <input type="range" id="labor-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="labor-amount">$0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Materials</span>
+                <input type="range" id="materials-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="materials-amount">$0</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let totalBudget = 0;
+
+    function updateBudget() {
+        totalBudget = parseInt(document.getElementById("total-budget").value) || 0;
+        document.getElementById("furniture-slider").max = totalBudget;
+        document.getElementById("decor-slider").max = totalBudget;
+        document.getElementById("labor-slider").max = totalBudget;
+        document.getElementById("materials-slider").max = totalBudget;
+        updateExpenses();
+    }
+
+    function updateExpenses() {
+        let furniture = parseInt(document.getElementById("furniture-slider").value) || 0;
+        let decor = parseInt(document.getElementById("decor-slider").value) || 0;
+        let labor = parseInt(document.getElementById("labor-slider").value) || 0;
+        let materials = parseInt(document.getElementById("materials-slider").value) || 0;
+
+        let spent = furniture + decor + labor + materials;
+        let remaining = totalBudget - spent;
+
+        document.getElementById("furniture-amount").innerText = `$${furniture}`;
+        document.getElementById("decor-amount").innerText = `$${decor}`;
+        document.getElementById("labor-amount").innerText = `$${labor}`;
+        document.getElementById("materials-amount").innerText = `$${materials}`;
+
+        document.getElementById("spent-amount").innerText = `$${spent}`;
+        document.getElementById("remaining-amount").innerText = `$${remaining}`;
+    }
+</script>
+
+@* Room measurement *@
+
+<section class="room-measurement">
+    <h2>Room Measurement</h2>
+    <div class="room-container">
+        <!-- Left: Room Image -->
+        <div class="room-image">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Room">
+        </div>
+
+        <!-- Right: Form for Room Dimensions -->
+        <div class="room-form">
+            <h3>Room Dimensions</h3>
+            <label>Length (ft)</label>
+            <input type="number" id="length" placeholder="Enter Length">
+
+            <label>Width (ft)</label>
+            <input type="number" id="width" placeholder="Enter Width">
+
+            <label>Height (ft)</label>
+            <input type="number" id="height" placeholder="Enter Height">
+
+            <button class="room-btn" onclick="calculateSpace()">Calculate Space</button>
+
+            <p id="result"></p>
+        </div>
+    </div>
+</section>
+
+<script>
+    function calculateSpace() {
+        let length = parseFloat(document.getElementById("length").value) || 0;
+        let width = parseFloat(document.getElementById("width").value) || 0;
+        let height = parseFloat(document.getElementById("height").value) || 0;
+        let volume = length * width * height;
+
+        document.getElementById("result").innerText = `Room Space: ${volume} cubic feet`;
+    }
+</script>
+
+@* job *@
+<section class="job-listings">
+    <h2>Join Our Team</h2>
+    <div class="job-container">
+        <div class="job-card">
+            <h3>Senior Interior Designer</h3>
+            <p>📍 New York, NY</p>
+            <p>💼 Full-time</p>
+            <p>🎓 5+ years</p>
+            <a href="#">View Details ➝</a>
+        </div>
+
+        <div class="job-card">
+            <h3>Design Consultant</h3>
+            <p>📍 Los Angeles, CA</p>
+            <p>💼 Full-time</p>
+            <p>🎓 3+ years</p>
+            <a href="#">View Details ➝</a>
+        </div>
+
+        <div class="job-card">
+            <h3>Project Manager</h3>
+            <p>📍 Chicago, IL</p>
+            <p>💼 Full-time</p>
+            <p>🎓 4+ years</p>
+            <a href="#">View Details ➝</a>
+        </div>
+
+        <div class="job-card">
+            <h3>3D Visualization Artist</h3>
+            <p>📍 Remote</p>
+            <p>💼 Contract</p>
+            <p>🎓 2+ years</p>
+            <a href="#">View Details ➝</a>
+        </div>
+    </div>
+</section>

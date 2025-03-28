@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="budget-planner">
+    <h2>Budget Planner</h2>
+    <div class="budget-container">
+        <!-- Project Overview -->
+        <div class="project-overview">
+            <h3>Project Overview</h3>
+            <div class="budget-details">
+                <div class="budget-item">
+                    <span>Total Budget</span>
+                    <input type="number" id="total-budget" placeholder="Enter Total Budget" oninput="updateBudget()">
+                </div>
+                <div class="budget-item">
+                    <span>Spent</span>
+                    <strong id="spent-amount">₹0</strong>
+                </div>
+                <div class="budget-item">
+                    <span>Remaining</span>
+                    <strong id="remaining-amount" class="remaining-amount">₹0</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Categories with Progress Bars -->
+        <div class="expense-categories">
+            <h3>Expense Categories</h3>
+            <div class="expense-item">
+                <span>Furniture</span>
+                <input type="range" id="furniture-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="furniture-amount">₹0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Decor</span>
+                <input type="range" id="decor-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="decor-amount">₹0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Labor</span>
+                <input type="range" id="labor-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="labor-amount">₹0</strong>
+            </div>
+            <div class="expense-item">
+                <span>Materials</span>
+                <input type="range" id="materials-slider" min="0" value="0" oninput="updateExpenses()">
+                <strong id="materials-amount">₹0</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let totalBudget = 0;
+
+    function updateBudget() {
+        totalBudget = parseInt(document.getElementById("total-budget").value) || 0;
+        document.getElementById("furniture-slider").max = totalBudget;
+        document.getElementById("decor-slider").max = totalBudget;
+        document.getElementById("labor-slider").max = totalBudget;
+        document.getElementById("materials-slider").max = totalBudget;
+        updateExpenses();
+    }
+
+    function updateExpenses() {
+        let furniture = parseInt(document.getElementById("furniture-slider").value) || 0;
+        let decor = parseInt(document.getElementById("decor-slider").value) || 0;
+        let labor = parseInt(document.getElementById("labor-slider").value) || 0;
+        let materials = parseInt(document.getElementById("materials-slider").value) || 0;
+
+        let spent = furniture + decor + labor + materials;
+        let remaining = totalBudget - spent;
+
+        document.getElementById("furniture-amount").innerText = `₹${furniture}`;
+        document.getElementById("decor-amount").innerText = `₹${decor}`;
+        document.getElementById("labor-amount").innerText = `₹${labor}`;
+        document.getElementById("materials-amount").innerText = `₹${materials}`;
+
+        document.getElementById("spent-amount").innerText = `₹${spent}`;
+        document.getElementById("remaining-amount").innerText = `₹${remaining}`;
+    }
+</script>
