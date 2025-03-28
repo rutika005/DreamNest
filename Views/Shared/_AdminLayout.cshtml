@@ -1,6 +1,30 @@
-﻿namespace Aesthetica.Views.Shared
-{
-    public class _AdminLayout
-    {
-    }
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aesthetica</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/Aesthetica.styles.css" asp-append-version="true" />
+    <link href="~/css/Admin.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Blog Management</a></li>
+            <li><a href="#">Budget Management</a></li>
+            <li><a href="#">Room Projects</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

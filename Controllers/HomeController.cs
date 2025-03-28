@@ -212,12 +212,6 @@ namespace Aesthetica.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        public IActionResult Login(LoginModel model)
-        {
-            return View(model);
-        }
-
         public IActionResult Forgotpass()
         {
             return View();
@@ -260,7 +254,6 @@ namespace Aesthetica.Controllers
             ViewBag.Message = "Password reset link has been sent to your email.";
             return View();
         }
-
 
         [HttpPost]
         private async Task SendResetEmail(string email, string resetLink)
