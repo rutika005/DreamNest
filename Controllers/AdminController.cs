@@ -6,6 +6,11 @@ namespace Aesthetica.Controllers
     {
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("UserEmail") != "admin")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View();
         }
     }

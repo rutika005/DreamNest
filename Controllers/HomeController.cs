@@ -5,6 +5,7 @@ using Aesthetica.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.ComponentModel.DataAnnotations;
 
 namespace Aesthetica.Controllers
 {
@@ -125,33 +126,65 @@ namespace Aesthetica.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(LoginModel model,string email, string password)
         {
             Console.WriteLine($"Entered Email: {email}");
             Console.WriteLine($"Entered Password: {password}");
 
-            var user = _context.userregister.FirstOrDefault(u => u.Email == email);
+            // Check in Admin Table
+            var admin = _context.admin.FirstOrDefault(a => a.Email == model.Email);
 
-            if (user == null)
+            if (admin != null)
+            {
+                Console.WriteLine($"Admin Password Type: {admin.Pass}");
+
+                // Convert to string if needed
+                string adminPassword = admin.Pass.Trim();
+
+                if (admin != null && !string.IsNullOrEmpty(admin.Pass))
+                {
+                    Console.WriteLine("Admin login successful!");
+                    HttpContext.Session.SetString("UserEmail", admin.Email);
+                    HttpContext.Session.SetString("UserRole", "Admin");
+                    Console.WriteLine($"Pass:  { model.Pass }");
+
+                    return RedirectToAction("Index", "Admin"); // Redirect to Admin Panel
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect admin password!");
+                    ViewBag.Message = "Incorrect password!";
+                    return View(model);
+                }
+            }
+
+            // If email is not in admin table, check in user table
+            else if (_context.userregister.Any(u => u.Email == model.Email))
+            {
+                var user = _context.userregister.FirstOrDefault(u => u.Email == model.Email);
+                Console.WriteLine($"Stored Password from DB: {user.Pass}");
+
+                if (user != null && !string.IsNullOrEmpty(user.Pass))
+                {
+                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserRole", "User");
+                    HttpContext.Session.SetString("UserName", user.Name);
+
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect user password!");
+                    ViewBag.Message = "Incorrect password!";
+                    return View(model);
+                }
+            }
+            else
             {
                 Console.WriteLine("Email not found in database!");
                 ViewBag.Message = "Email not found!";
-                return View();
+                return View(model);
             }
-
-            Console.WriteLine($"Stored Password from DB: {user.Pass}");
-
-            if (user.Pass.Trim() != password.Trim())
-            {
-                Console.WriteLine("Incorrect password!");
-                ViewBag.Message = "Incorrect password!";
-                return View();
-            }
-
-            HttpContext.Session.SetString("UserEmail", user.Email);
-            HttpContext.Session.SetString("UserName", user.Name);
-
-            return RedirectToAction("Index", "User");
         }
 
         public IActionResult VerifyEmail(string token)
