@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+﻿namespace Aesthetica.Models
+{
+    public class LoginModel
+    {
+=======
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Aesthetica.Models
@@ -14,5 +20,6 @@ namespace Aesthetica.Models
         [DataType(DataType.Password)]
         public string Pass { get; set; } // Renamed for clarity
 
+>>>>>>> 31356455c29b56a3881d428a9c31b42423d44962
     }
 }

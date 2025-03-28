@@ -212,6 +212,13 @@ namespace Aesthetica.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+<<<<<<< HEAD
+        public IActionResult Login(LoginModel model)
+        {
+            return View(model);
+        }
+
+=======
         public IActionResult Forgotpass()
         {
             return View();
@@ -313,5 +320,6 @@ namespace Aesthetica.Controllers
             ViewBag.Message = "Password successfully reset! You can now login.";
             return RedirectToAction("Login");
         }
+>>>>>>> 31356455c29b56a3881d428a9c31b42423d44962
     }
 }
