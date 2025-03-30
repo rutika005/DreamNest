@@ -62,11 +62,11 @@ body {
             }
 
 /* Toggle Button */
-.menu-btn {
-    color:white;
+.menuBtn {
+    color:black;
     font-size: 25px;
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     left: 10px;
     top: 10px;
     background: none;
@@ -116,7 +116,8 @@ body {
         left: 0;
     }
 
-    .menu-btn {
+    .menuBtn {
+        color: white;
         display: flex; /* Force button to be visible */
     }
 
