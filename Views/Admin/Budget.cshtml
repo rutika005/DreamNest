@@ -1,6 +1,94 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="dashboard">
-<h1>Budget</h1>
+
+<div class="budget-container">
+    <!-- Budget Overview Header -->
+    <div class="budget-header">
+        <h1>Budget Overview</h1>
+        <div class="budget-actions">
+            <button class="export-btn">📤 Export</button>
+            <button class="new-budget-btn">+ New Budget</button>
+        </div>
+    </div>
+
+    <!-- Budget Stats Cards -->
+    <div class="budget-stats">
+        <div class="stat-card">
+            <p>Total Budget</p>
+            <h2>$245,000</h2>
+            <span class="increase">↑ 12% from last month</span>
+        </div>
+        <div class="stat-card">
+            <p>Spent</p>
+            <h2>$82,500</h2>
+            <span class="info">33.7% of total budget</span>
+        </div>
+        <div class="stat-card">
+            <p>Remaining</p>
+            <h2>$162,500</h2>
+            <span class="available">86.3% available</span>
+        </div>
+        <div class="stat-card">
+            <p>Active Projects</p>
+            <h2>8</h2>
+            <span class="increase">↑ 2 new this month</span>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="recent-transactions">
+        <h3>Recent Transactions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Project</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jan 15, 2025</td>
+                    <td>Modern Villa Project</td>
+                    <td>Furniture</td>
+                    <td>$12,500</td>
+                    <td><span class="status completed">Completed</span></td>
+                </tr>
+                <tr>
+                    <td>Jan 12, 2025</td>
+                    <td>Urban Apartment</td>
+                    <td>Lighting</td>
+                    <td>$4,800</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Jan 10, 2025</td>
+                    <td>Beach House</td>
+                    <td>Decor</td>
+                    <td>$8,300</td>
+                    <td><span class="status completed">Completed</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Project Budget Distribution -->
+    <div class="budget-distribution"><br />
+        <h3>Project Budget Distribution</h3><br />
+        <span>Modern Villa Project</span><br />
+        <div class="progress-bar">
+            <div class="progress"><div class="progress-fill" style="width: 75%;"></div></div>
+        </div>
+        <span>Urban Apartment</span><br />
+        <div class="progress-bar">
+            <div class="progress"><div class="progress-fill" style="width: 45%;"></div></div>
+        </div>
+        <span>Beach House</span><br />
+        <div class="progress-bar">
+            <div class="progress"><div class="progress-fill" style="width: 60%;"></div></div>
+        </div>
+    </div>
 </div>
