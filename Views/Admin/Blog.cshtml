@@ -1,6 +1,81 @@
-﻿@{
+﻿@model List<Aesthetica.Models.BlogPost>
+
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="dashboard">
-<h1>Blog</h1>
+
+<div class="blog-container">
+    <div class="blog-header">
+        <div class="blog-title">
+            <h1>Blog Posts</h1>
+            <p>Manage your blog content</p>
+        </div>
+        <button class="new-post-btn">+ New Post</button>
+    </div>
+
+            <input type="text" class="search-input" placeholder="Search posts..." />
+            <select class="filter-dropdown">
+                <option>All Categories</option>
+            </select>
+            <select class="filter-dropdown">
+                <option>Status</option>
+            </select>
+        </div>
+<div class="blog-card">
+    <div class="blog-actions">
+
+        <div class="table-responsive">
+            <table class="blog-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var post in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="post-info">
+                                    <img src="@post.Thumbnail" alt="Thumbnail" class="post-thumbnail">
+                                    <span>@post.Title</span>
+                                </div>
+                            </td>
+                            <td>@post.Category</td>
+                            <td>
+                                <div class="author-info">
+                                    <img src="@post.AuthorImage" alt="Author" class="author-img">
+                                    <span>@post.Author</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="status @post.Status.ToLower()">@post.Status</span>
+                            </td>
+                            <td>@post.Date.ToString("MMM dd, yyyy")</td>
+                            <td>
+                                <button class="edit-btn">✏️</button>
+                                <button class="delete-btn">🗑️</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row pagination-container">
+        <span>Showing 1 to 2 of 12 entries</span>
+
+        <div class="pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">Next</button>
+        </div>
+    </div>
+
 </div>
