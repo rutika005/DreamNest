@@ -95,7 +95,12 @@ body {
 
             .sidebar ul li:hover {
                 background-color: black;
+                border-radius: 10px;
             }
+
+                .sidebar ul li:hover a {
+                    color: white;
+                }
 
 /* Toggle Button */
 .menuBtn {
