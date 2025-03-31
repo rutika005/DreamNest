@@ -13,5 +13,30 @@ namespace Aesthetica.Controllers
 
             return View();
         }
+
+        public IActionResult Blog()
+        {
+            return View();
+        }
+
+        public IActionResult Budget()
+        {
+            return View();
+        }
+
+        public IActionResult Room()
+        {
+            return View();
+        }
+
+        public IActionResult Career()
+        {
+            return View();
+        }
+
+        public IActionResult Setting()
+        {
+            return View();
+        }
     }
 }

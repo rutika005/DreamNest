@@ -1,37 +1,40 @@
-﻿@{
-    Layout = null;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="~/css/Admin.css">
-    <script defer src="~/js/script.js"></script>
     <script src="~/js/script.js"></script>
 </head>
 <body>
-
-    <!-- Toggle Button for Sidebar -->
-    <button class="menBtn" id="menuBtn">&#9776;</button>
-
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    <section id="sidebar" class="sidebar">
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
         <div class="profile">
             <img src="~/images/Aesthetica.jpg" alt="User Profile">
-            <h3>Vaghasiya Rutika</h3>
+            <h3>Admin</h3>
             <p>Senior Admin</p>
         </div>
         <ul>
-            <li><a href="/Dashboard">Dashboard</a></li>
-            <li><a href="/BlogManagement">Blog Management</a></li>
-            <li><a href="/BudgetManagement">Budget Management</a></li>
-            <li><a href="/RoomProjects">Room Projects</a></li>
-            <li><a href="/Careers">Careers</a></li>
-            <li><a href="/Settings">Settings</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Blog">Blog Management</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Budget">Budget Management</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Room">Room Projects</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Career">Careers</a></li>
+            <li><a asp-area="" asp-controller="Admin" asp-action="Setting">Settings</a></li>
         </ul>
-    </div>
+        <ul class="side-menu">
+            <!-- Logout Link -->
+            <li>
+                <a asp-area="" asp-controller="Admin" asp-action="Index" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+
+    </section>
 
     <!-- Main Content Area -->
     <div class="main-content">
@@ -42,13 +45,13 @@
                 <div class="nav-icons">
                     <span class="icon">🔔</span>
                     <span class="icon">⚙️</span>
-                    <img src="~/images/twitter-x.svg" alt="Profile" class="nav-profile">
+                    <img src="~/images/Aesthetica.jpg" alt="Profile" class="nav-profile">
                 </div>
             </div>
         </header>
 
         <main>
-            @RenderBody() <!-- This will render the child views -->
+            @RenderBody()
         </main>
     </div>
 
