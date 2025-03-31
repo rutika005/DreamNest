@@ -12,16 +12,34 @@
     <section id="sidebar" class="sidebar">
         <div class="profile">
             <img src="~/images/profile.png" alt="User Profile">
-            <h3>Admin</h3>
-            <p>Senior Admin</p>
+            <h3 class="t1">Admin</h3>
+            <p class="t1">Senior Admin</p>
         </div>
         <ul>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Blog">Blog Management</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Budget">Budget Management</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Room">Room Projects</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Career">Careers</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Setting">Settings</a></li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                <a asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Blog" ? "active" : "")">
+                <a asp-area="" asp-controller="Admin" asp-action="Blog">Blog Management</a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Budget" ? "active" : "")">
+                <a asp-area="" asp-controller="Admin" asp-action="Budget">Budget Management</a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Room" ? "active" : "")">
+                <a asp-area="" asp-controller="Admin" asp-action="Room">Room Projects</a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Career" ? "active" : "")">
+                 <a asp-area="" asp-controller="Admin" asp-action="Career">Careers</a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Setting" ? "active" : "")">
+                 <a asp-area="" asp-controller="Admin" asp-action="Setting">Settings</a>
+            </li>
+
         </ul>
         <ul class="side-menu">
             <li>
