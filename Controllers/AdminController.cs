@@ -34,6 +34,11 @@ namespace Aesthetica.Controllers
             return View();
         }
 
+        public IActionResult JobApplication()
+        {
+            return View();
+        }
+
         public IActionResult Setting()
         {
             return View();

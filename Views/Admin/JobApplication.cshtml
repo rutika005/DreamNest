@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-careers">
+    <h2 class="title">Job Applications</h2>
+    <p class="subtitle">Manage and review candidate applications</p>
+
+    <div class="stats">
+        <div class="stat-box">
+            <p>Total Applications</p>
+            <h3>248</h3>
+        </div>
+        <div class="stat-box">
+            <p>New Applications</p>
+            <h3>42</h3>
+        </div>
+        <div class="stat-box">
+            <p>Shortlisted</p>
+            <h3>28</h3>
+        </div>
+        <div class="stat-box">
+            <p>Rejected</p>
+            <h3>18</h3>
+        </div>
+    </div>
+
+    <div class="search-filter">
+        <input type="text" class="search-box" placeholder="Search applications...">
+        <button class="filter-btn">Filters</button>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Applicant</th>
+                    <th>Position</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="~/Content/images/user1.jpg" class="avatar" alt="Sarah">
+                        <span>Sarah Wilson</span>
+                        <p>sarah.wilson@email.com</p>
+                    </td>
+                    <td>Senior Interior Designer</td>
+                    <td>Jan 15, 2025</td>
+                    <td><span class="badge shortlisted">Shortlisted</span></td>
+                    <td>
+                        <button class="view-btn">👁️</button>
+                        <button class="delete-btn">🗑️</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Content/images/user2.jpg" class="avatar" alt="Michael">
+                        <span>Michael Chen</span>
+                        <p>michael.chen@email.com</p>
+                    </td>
+                    <td>Junior Designer</td>
+                    <td>Jan 14, 2025</td>
+                    <td><span class="badge review">Under Review</span></td>
+                    <td>
+                        <button class="view-btn">👁️</button>
+                        <button class="delete-btn">🗑️</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Content/images/user3.jpg" class="avatar" alt="Emily">
+                        <span>Emily Brown</span>
+                        <p>emily.brown@email.com</p>
+                    </td>
+                    <td>Project Manager</td>
+                    <td>Jan 13, 2025</td>
+                    <td><span class="badge rejected">Rejected</span></td>
+                    <td>
+                        <button class="view-btn">👁️</button>
+                        <button class="delete-btn">🗑️</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button class="prev">Previous</button>
+        <button class="page active">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <button class="next">Next</button>
+    </div>
+</div>

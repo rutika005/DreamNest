@@ -20,7 +20,13 @@
             <li><a asp-area="" asp-controller="Admin" asp-action="Blog">Blog Management</a></li>
             <li><a asp-area="" asp-controller="Admin" asp-action="Budget">Budget Management</a></li>
             <li><a asp-area="" asp-controller="Admin" asp-action="Room">Room Projects</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Career">Careers</a></li>
+            @* <li class="dropdown"> *@
+                @* <a asp-controller="Admin" asp-action="Career" class="dropdown-toggle">Careers ▼</a> *@
+                @* <ul class="dropdown-menu"> *@
+                    <li><a asp-area="" asp-controller="Admin" asp-action="Career">Careers</a></li>
+                    @* <li><a asp-area="" asp-controller="Admin" asp-action="JobApplications">Job Applications</a></li> *@
+                @* </ul> *@
+            @* </li> *@
             <li><a asp-area="" asp-controller="Admin" asp-action="Setting">Settings</a></li>
         </ul>
         <ul class="side-menu">

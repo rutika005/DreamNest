@@ -1,6 +1,89 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="dashboard">
-<h1>Room</h1>
+<div class="container-room">
+    <div class="header">
+        <input type="text" placeholder="Search..." class="search-box" />
+    </div>
+
+    <h2>Room Management</h2>
+
+    <div class="stats">
+        <div class="card">
+            <p>Total Rooms</p>
+            <h3>248</h3>
+        </div>
+        <div class="card">
+            <p>In Progress</p>
+            <h3>45</h3>
+        </div>
+        <div class="card">
+            <p>Completed</p>
+            <h3>182</h3>
+        </div>
+        <div class="card">
+            <p>On Hold</p>
+            <h3>21</h3>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="add-room-btn">+ Add New Room</button>
+    </div>
+
+    <div class="table-controls">
+        <button class="filter-btn">Filter</button>
+        <button class="sort-btn">Sort</button>
+    </div>
+
+    <table class="room-table">
+        <thead>
+            <tr>
+                <th>Room ID</th>
+                <th>Room Name</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Designer</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#R001</td>
+                <td>Master Bedroom</td>
+                <td>Luxury Villa</td>
+                <td><span class="status completed">Completed</span></td>
+                <td>John Doe</td>
+                <td>Dec 15, 2025</td>
+                <td><span class="edit">✏️</span> <span class="delete">🗑️</span></td>
+            </tr>
+            <tr>
+                <td>#R002</td>
+                <td>Living Room</td>
+                <td>Modern Apartment</td>
+                <td><span class="status in-progress">In Progress</span></td>
+                <td>Jane Smith</td>
+                <td>Jan 20, 2025</td>
+                <td><span class="edit">✏️</span> <span class="delete">🗑️</span></td>
+            </tr>
+            <tr>
+                <td>#R003</td>
+                <td>Kitchen</td>
+                <td>Urban Loft</td>
+                <td><span class="status on-hold">On Hold</span></td>
+                <td>Mike Johnson</td>
+                <td>Feb 28, 2025</td>
+                <td><span class="edit">✏️</span> <span class="delete">🗑️</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button>Previous</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>Next</button>
+    </div>
 </div>
