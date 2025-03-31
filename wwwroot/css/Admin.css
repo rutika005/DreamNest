@@ -282,3 +282,79 @@ body {
         width: 100%;
     }
 }
+/* General Mobile & Tablet Optimization */
+@media (max-width: 957px) {
+    /* Adjust Sidebar */
+    .sidebar {
+        width: 220px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Sidebar Profile */
+    .sidebar .profile img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .sidebar ul li {
+        padding: 12px;
+    }
+
+    /* Adjust Top Navigation */
+    .top-nav {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .nav-icons .icon {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    .nav-profile {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* Adjust Main Content */
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    /* Adjust Stats */
+    .stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .stat-box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust Content Layout */
+    .content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .blog-posts,
+    .style-categories,
+    .budget-overview,
+    .active-projects {
+        width: 100%;
+    }
+
+    /* Sidebar Toggle Button */
+    .menuBtn {
+        font-size: 22px;
+        left: 10px;
+        top: 10px;
+    }
+}
