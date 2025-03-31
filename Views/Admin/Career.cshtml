@@ -1,6 +1,81 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="dashboard">
-<h1>Career</h1>
+
+<div class="container-carees">
+    <h1>Job Opportunities</h1>
+    <p class="subtitle">Manage job postings and opportunities</p>
+
+    <div class="actions-bar">
+        <input type="text" placeholder="Search positions…" class="search-input" />
+        <select class="filter-dropdown">
+            <option>All Departments</option>
+        </select>
+        <select class="filter-dropdown">
+            <option>All Locations</option>
+        </select>
+        <button class="add-button">+ Add New Position</button>
+    </div>
+
+    <table class="job-table">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Posted Date</th>
+                <th>Applications</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Senior Interior Designer</td>
+                <td>Design</td>
+                <td>New York</td>
+                <td>Jan 15, 2025</td>
+                <td><span class="badge blue">12 New</span></td>
+                <td><span class="badge green">Active</span></td>
+                <td>
+                    <a href="#"><i class="icon edit"></i></a>
+                    <a href="#"><i class="icon delete"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Project Manager</td>
+                <td>Project Management</td>
+                <td>London</td>
+                <td>Jan 10, 2025</td>
+                <td><span class="badge blue">8 New</span></td>
+                <td><span class="badge green">Active</span></td>
+                <td>
+                    <a href="#"><i class="icon edit"></i></a>
+                    <a href="#"><i class="icon delete"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Junior Architect</td>
+                <td>Architecture</td>
+                <td>Dubai</td>
+                <td>Jan 5, 2025</td>
+                <td><span class="badge blue">15 New</span></td>
+                <td><span class="badge yellow">Close</span></td>
+                <td>
+                    <a href="#"><i class="icon edit"></i></a>
+                    <a href="#"><i class="icon delete"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button class="page-button">Previous</button>
+        <button class="page-button active">1</button>
+        <button class="page-button">2</button>
+        <button class="page-button">3</button>
+        <button class="page-button">Next</button>
+    </div>
+
+    <p class="results-text">Showing 1 to 3 of 12 results</p>
 </div>
