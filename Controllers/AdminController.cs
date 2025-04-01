@@ -49,5 +49,28 @@ namespace Aesthetica.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult UpdateProfile(string FirstName, string LastName, string Email, string Bio)
+        {
+            // Handle profile update logic (Save to DB, validate, etc.)
+            TempData["Message"] = "Profile updated successfully!";
+            return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
+        {
+            // Handle password update logic (validation, hashing, saving to DB)
+            if (NewPassword == ConfirmPassword)
+            {
+                TempData["Message"] = "Password updated successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Passwords do not match!";
+            }
+            return RedirectToAction("Settings");
+        }
     }
 }
