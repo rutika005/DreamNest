@@ -86,12 +86,12 @@ namespace Aesthetica.Controllers
                 model.IsVerified = false; // Default false
                 Console.WriteLine("Generated Token: " + model.token);
 
-                // Validate Role (Ensure it's either "User" or "Admin")
-                if (model.role != "User" && model.role != "Admin")
-                {
-                    ModelState.AddModelError("role", "Invalid role selected.");
-                    return View(model);
-                }
+                //// Validate Role (Ensure it's either "User" or "Admin")
+                //if (model.role != "User" && model.role != "Admin")
+                //{
+                //    ModelState.AddModelError("role", "Invalid role selected.");
+                //    return View(model);
+                //}
 
                 //  Save to Database
                 _context.userregister.Add(model);

@@ -36,9 +36,9 @@ namespace Aesthetica.Models
 
         public DateTime? ResetTokenExpiry { get; set; }
 
-        [Required]
-        [Display(Name = "Role")]
-        public string role { get; set; }
+        //[Required]
+        //[Display(Name = "Role")]
+        //public string role { get; set; }
 
     }
 }
