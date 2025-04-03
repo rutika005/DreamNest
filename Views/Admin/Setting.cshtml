@@ -1,6 +1,40 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="dashboard">
-<h1>Setting</h1>
+<div class="settings-container">
+    <h2 class="page-title">Settings</h2><br />
+    <p class="subtitle">Manage your account settings and preferences</p>
+
+    <div class="settings-content">
+        <!-- Profile Settings -->
+        <div class="profile-settings">
+            <h4>Profile Settings</h4>
+            <br />
+            <div class="profile-image">
+                <img src="~/images/profile.png" alt="Profile Picture">
+                <button class="btn btn-dark">Change Photo</button> 
+                <p class="image-info">JPG or PNG. Max size of 800K</p>
+            </div>
+            <br />
+            <form>
+                <div class="input-group">
+                    <div>
+                        <label>First Name</label>
+                        <input type="text" class="form-control" value="">
+                    </div>
+                    <div>
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" value="">
+                    </div>
+                </div>
+                <label>Email</label>
+                <input type="email" class="form-control" value="">
+
+                <label>Bio</label>
+                <textarea class="form-control" rows="3"></textarea>
+
+                <button type="submit" class="btn btn-dark save-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
 </div>

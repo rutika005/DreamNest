@@ -155,6 +155,17 @@ body {
     z-index: 1000;
 }
 
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+li:hover .submenu {
+    display: block;
+}
+
+
 /* Main Content */
 .main-content {
     flex-grow: 1;
@@ -992,7 +1003,6 @@ th, td {
 }
 
 .progress {
-    background: lightgray;
     height: 10px;
     border-radius: 5px;
     overflow: hidden;
@@ -1002,3 +1012,142 @@ th, td {
     background: black;
     height: 100%;
 }
+
+ /* Setting page */
+
+/* General Page Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Settings Page Container */
+.settings-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Header */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Content Layout (Side-by-Side Sections) */
+.settings-content {
+    display: flex;
+    gap: 20px;
+}
+
+/* Profile Image Section */
+.profile-image {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+    .profile-image img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ddd;
+    }
+
+    .profile-image .image-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image button {
+        background-color: #000;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+
+        .profile-image button:hover {
+            background-color: #333;
+        }
+
+.image-info {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    gap: 15px;
+}
+
+    .input-group div {
+        flex: 1;
+    }
+
+label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #000;
+    }
+
+/* Buttons */
+.btn-dark {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-dark:hover {
+        background-color: #333;
+    }
+
+/* Button Spacing */
+.save-btn,
+.update-btn {
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .settings-content {
+        flex-direction: column;
+    }
+}
+
