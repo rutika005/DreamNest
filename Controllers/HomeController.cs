@@ -115,7 +115,7 @@ namespace Aesthetica.Controllers
                 Console.WriteLine($"Name: {model.Name}, Email: {model.Email}, Token: {model.token}");
 
 
-                ViewBag.Message = "Registered successfully! Check your email to verify your account.";
+                //ViewBag.Message = "Registered successfully! Check your email to verify your account.";
                 return RedirectToAction("Register", "Home");
             
         }
