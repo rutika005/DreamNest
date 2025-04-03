@@ -46,6 +46,13 @@
                 <a asp-area="" asp-controller="Admin" asp-action="Career">
                     <i class="bi bi-briefcase"></i> <span>Careers</span>
                 </a>
+                <ul class="submenu">
+                    <li>
+                        <a asp-area="" asp-controller="Admin" asp-action="JobApplication">
+                            <i class="bi bi-file-earmark-text"></i> <span>Job Application</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Setting" ? "active" : "")">

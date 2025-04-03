@@ -50,6 +50,12 @@ namespace Aesthetica.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Session deleted
+            return RedirectToAction("Index", "Home"); // return toguest panel
+        }
+
         [HttpPost]
         public ActionResult UpdateProfile(string FirstName, string LastName, string Email, string Bio)
         {
