@@ -9,6 +9,8 @@ namespace Aesthetica.Models
 {
     public class RegisterModel
     {
+        internal string IdentityUserId;
+
         [Key] // Primary Key for database
         public int Id { get; set; }
 

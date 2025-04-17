@@ -704,3 +704,106 @@ input[type="range"] {
         grid-template-columns: 1fr;
     }
 }
+
+.Profile-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-right: 20px;
+}
+
+.profile-photo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .profile-photo img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.change-photo {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #6c63ff;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+    .sidebar-nav a.active,
+    .sidebar-nav a:hover {
+        background-color: #6c63ff;
+        color: #fff;
+    }
+
+.main-content {
+    flex: 1;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body p {
+    margin: 8px 0;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: none;
+    color: #6c63ff;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+}

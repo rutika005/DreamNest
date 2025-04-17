@@ -1,0 +1,50 @@
+﻿@model Aesthetica.Models.UserRegister
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+    <div class="Profile-container">
+        <aside class="sidebar">
+            <div class="profile-photo">
+            <img src="~/images/profile.png" alt="Profile Photo">
+                <button class="change-photo">Change Photo</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active">Profile Information</a>
+                <a href="#">Saved Designs</a>
+                <a href="#">Notifications</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h2>Profile Information</h2>
+
+            <section class="card">
+                <div class="card-header">
+                    <h3>Personal Information</h3>
+                    <span class="edit-icon">✏️</span>
+                </div>
+                <div class="card-body">
+                <p><strong>Full Name:</strong> @Model.Name</p>
+                <p><strong>Location:</strong> @Model.Location</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h3>Contact Details</h3>
+                    <span class="edit-icon">✏️</span>
+                </div>
+                <div class="card-body">
+                <p><strong>Email Address:</strong>  @Model.Email</p>
+                <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+                    <div class="social-links">
+                    <a href="@Model.LinkedIn">LinkedIn</a>
+                    <a href="@Model.Instagram">Instagram</a>
+                    <a href="@Model.Twitter">Twitter</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>

@@ -1,14 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Aesthetica.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aesthetica.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly AppDbContext _context;
+        public AdminController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [RoleAuthorize("Admin")]
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("UserEmail") != "admin")
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Home");
             }
 
             return View();
@@ -16,11 +25,7 @@ namespace Aesthetica.Controllers
 
         public IActionResult Blog()
         {
-            List<Models.BlogPost> blogPosts = new List<Models.BlogPost>
-        {
-            new Models.BlogPost { Id = 1, Title = "Modern Interior Design Trends 2025", Category = "Interior Design", Author = "Sarah Johnson", AuthorImage = "/images/p1.png", Status = "Published", Date = new DateTime(2025, 1, 15), Thumbnail = "/images/blog1.png" },
-            new Models.BlogPost { Id = 2, Title = "Luxury Bedroom Designs", Category = "Decoration", Author = "Mike Wilson", AuthorImage = "/images/p2.png", Status = "Draft", Date = new DateTime(2025, 1, 12), Thumbnail = "/images/blog2.png" }
-        };
+            var blogPosts = _context.blogadmin.ToList();
 
             return View(blogPosts);
         }
@@ -78,5 +83,41 @@ namespace Aesthetica.Controllers
             }
             return RedirectToAction("Settings");
         }
+
+        [HttpPost]
+        public IActionResult Blog(BlogPost blogPost, IFormFile Thumbnail, IFormFile AuthorImage)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save image files
+                if (Thumbnail != null)
+                {
+                    var thumbnailPath = Path.Combine("wwwroot/images", Thumbnail.FileName);
+                    using (var stream = new FileStream(thumbnailPath, FileMode.Create))
+                    {
+                        Thumbnail.CopyTo(stream);
+                    }
+                    blogPost.Thumbnail = Thumbnail.FileName;
+                }
+
+                if (AuthorImage != null)
+                {
+                    var authorImagePath = Path.Combine("wwwroot/images", AuthorImage.FileName);
+                    using (var stream = new FileStream(authorImagePath, FileMode.Create))
+                    {
+                        AuthorImage.CopyTo(stream);
+                    }
+                    blogPost.AuthorImage = AuthorImage.FileName;
+                }
+
+                _context.blogadmin.Add(blogPost); // assuming _context is your DB context
+                _context.SaveChanges();
+
+                return RedirectToAction("BlogPosts");
+            }
+
+            return View("BlogPosts", _context.blogadmin.ToList());
+        }
+
     }
 }

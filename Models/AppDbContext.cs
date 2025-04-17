@@ -8,6 +8,8 @@ namespace Aesthetica.Models
 
         public DbSet<ContactModel> contact { get; set; }  // Maps to Contacts table
         public DbSet<RegisterModel> userregister { get; set; }  // Maps to Users table
-        public DbSet<LoginModel> admin { get; set; }             
+        public DbSet<UserRegister> userRegister { get; set; }
+        public DbSet<LoginModel> admin { get; set; }           
+        public DbSet<BlogPost> blogadmin { get;  set; }
     }
 }

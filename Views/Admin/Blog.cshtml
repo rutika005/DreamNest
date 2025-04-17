@@ -10,7 +10,7 @@
             <h1>Blog Posts</h1>
             <p>Manage your blog content</p>
         </div>
-        <button class="new-post-btn">+ New Post</button>
+        <button onclick="window.location.href='@Url.Action("AddPost", "Admin")';" class="new-post-btn">+ New Post</button>
     </div>
 
             <input type="text" class="search-input" placeholder="Search posts..." />
@@ -42,14 +42,14 @@
                         <tr>
                             <td>
                                 <div class="post-info">
-                                    <img src="@post.Thumbnail" alt="Thumbnail" class="post-thumbnail">
+                                    <img src="~/images/@post.Thumbnail" alt="Thumbnail" class="post-thumbnail">
                                     <span>@post.Title</span>
                                 </div>
                             </td>
                             <td>@post.Category</td>
                             <td>
                                 <div class="author-info">
-                                    <img src="@post.AuthorImage" alt="Author" class="author-img">
+                                    <img src="~/images/@post.AuthorImage" alt="Author" class="author-img">
                                     <span>@post.Author</span>
                                 </div>
                             </td>
@@ -79,3 +79,68 @@
     </div>
 
 </div>
+
+<div id="newPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>New Blog Post</h2>
+        <form asp-action="AddPost" method="post" asp-asp-controller="Admin">
+            <label>Title</label>
+            <input type="text" name="Title" required />
+
+            <label>Category</label>
+            <select name="Category" required>
+                <option>Minimalist</option>
+                <option>Modern</option>
+                <option>Contemporary</option>
+                <option>Industrial</option>
+                <option>Scandinavian</option>
+                <option>Traditional</option>
+                <option>Bohemian</option>
+                <option>Rustic</option>
+                <option>Mid-century Modern</option>
+                <option>Coastal</option>
+            </select>
+
+            <label>Author</label>
+            <input type="text" name="Author" required />
+
+            <label>Status</label>
+            <select name="Status" required>
+                <option>Draft</option>
+                <option>Published</option>
+            </select>
+
+            <label>Date</label>
+            <input type="date" name="Date" required />
+
+            <label>Thumbnail</label>
+            <input type="file" name="Thumbnail" accept="image/*" required />
+
+            <label>Author Image</label>
+            <input type="file" name="AuthorImage" accept="image/*" required />
+
+            <button type="submit" class="submit-btn">Post Blog</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById("newPostModal");
+    const newPostBtn = document.querySelector(".new-post-btn");
+    const closeBtn = document.querySelector(".close-btn");
+
+    newPostBtn.onclick = () => {
+        modal.style.display = "block";
+    };
+
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>

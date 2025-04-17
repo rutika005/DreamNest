@@ -1,14 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Aesthetica.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Aesthetica.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
+
+        private readonly AppDbContext _context;
+
+        public UserController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [RoleAuthorize("User")]
+        public async Task<IActionResult> Index()
         {
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
+
 
         public IActionResult Logout()
         {
@@ -39,6 +54,18 @@ namespace Aesthetica.Controllers
         public IActionResult Career()
         {
             return View();
+        }
+
+        public IActionResult Profile()
+        {
+            var model = _context.userRegister.FirstOrDefault();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
         }
     }
 }

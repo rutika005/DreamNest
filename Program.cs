@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Bind email settings
 builder.Services.Configure<EmailSettings>(
-    builder.Configuration.GetSection("EmailSettings"));
+builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddScoped<UserService>();   // User Services
 builder.Services.AddScoped<EmailService>();  // Email Services
@@ -16,6 +16,9 @@ builder.Services.AddDistributedMemoryCache(); // ✅ Required for session storag
 builder.Services.AddSession(); // ✅ Enable session services
 
 builder.Services.AddControllersWithViews(); // Keep your existing services
+
+
+builder.Services.Configure<RazorpayOptions>(builder.Configuration.GetSection("Razorpay"));
 
 
 // Add services to the container.
