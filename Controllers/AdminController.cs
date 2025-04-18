@@ -32,7 +32,26 @@ namespace Aesthetica.Controllers
 
         public IActionResult Budget()
         {
-            return View();
+           return View();
+            // Retrieve all budget items from the database
+            var budgetItems = _context.BudgetItems.ToList();
+
+            // Pass the list of budget items to the view
+            return View(budgetItems);
+        }
+        [HttpPost]
+        public IActionResult CreateBudgetItem(BudgetItem model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.BudgetItems.Add(model); // Assuming you have a DbSet<BudgetItem> in your AppDbContext
+                _context.SaveChanges();
+                TempData["Message"] = "Budget item added successfully!";
+                return RedirectToAction("Budget"); // Redirect back to the budget page or another appropriate action
+            }
+
+            // If the model state is not valid, redisplay the Budget view with validation errors
+            return View("Budget", model); // You might need to pass the model back to the view
         }
 
         public IActionResult Room()

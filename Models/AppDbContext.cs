@@ -11,5 +11,6 @@ namespace Aesthetica.Models
         public DbSet<UserRegister> userRegister { get; set; }
         public DbSet<LoginModel> admin { get; set; }           
         public DbSet<BlogPost> blogadmin { get;  set; }
+        public DbSet<BudgetItem> BudgetItems { get; set; }  //for add new budget
     }
 }
