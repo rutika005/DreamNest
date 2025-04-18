@@ -38,19 +38,32 @@ namespace Aesthetica.Controllers
             return View(budgetItems);
         }
 
+        public IActionResult AddPost(BlogPost model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.blogadmin.Add(model);
+                _context.SaveChanges();
+                TempData["Message"] = "Blog item added successfully!";
+                return RedirectToAction("Blog"); 
+            }
+
+            return View("Blog", model);
+
+        }
+
         [HttpPost]
         public IActionResult CreateBudgetItem(BudgetItem model)
         {
             if (ModelState.IsValid)
             {
-                _context.BudgetItems.Add(model); // Assuming you have a DbSet<BudgetItem> in your AppDbContext
+                _context.BudgetItems.Add(model); 
                 _context.SaveChanges();
                 TempData["Message"] = "Budget item added successfully!";
-                return RedirectToAction("Budget"); // Redirect back to the budget page or another appropriate action
+                return RedirectToAction("Budget");
             }
 
-            // If the model state is not valid, redisplay the Budget view with validation errors
-            return View("Budget", model); // You might need to pass the model back to the view
+            return View("Budget", model); 
         }
 
         public IActionResult Room()

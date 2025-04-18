@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="Profile-container">
+    <aside class="sidebar">
+        <div class="profile-photo">
+            <img src="~/images/profile.png" alt="Profile Photo">
+            <button class="change-photo">Change Photo</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a asp-controller="User" asp-action="Profile">Profile Information</a>
+            <a asp-controller="User" asp-action="SavedDesign" class="active">Saved Designs</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+    <section class="blog-list">
+        @foreach (var post in Model)
+        {
+            <div class="blog-card">
+                <img src="@post.ImageUrl" alt="@post.Title"><br /><br />
+                <div class="blog-content">
+                    <span class="blog-type">@post.Category</span><br /><br />
+
+                    <i class="fa-regular fa-bookmark save-icon"
+                       data-title="@post.Title"
+                       data-description="@post.Description"
+                       data-image="@post.ImageUrl"
+                       data-category="@post.Category"
+                       title="Save this post"></i>
+
+                    <h3 class="blog-head">@post.Title</h3>
+                    <p>@post.Description</p>
+                </div>
+            </div>
+        }
+    </section>
+    </main>
+</div>

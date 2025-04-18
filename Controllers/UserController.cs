@@ -33,13 +33,13 @@ namespace Aesthetica.Controllers
         public IActionResult Blog()
         {
             var savedPosts = _context.savedposts.OrderByDescending(p => p.SavedAt).ToList();
-
             return View(savedPosts);
         }
 
         [HttpPost("save-post")]
         public IActionResult SavePost([FromBody] SavedPost post)
         {
+            var savedPosts = _context.savedposts.OrderByDescending(p => p.SavedAt).ToList();
             if (ModelState.IsValid)
             {
                 post.SavedAt = DateTime.Now;
@@ -48,7 +48,7 @@ namespace Aesthetica.Controllers
                 return Ok(new { success = true });
             }
 
-            return BadRequest(new { success = false, message = "Invalid data" });
+            return View(savedPosts);
         }
 
         public IActionResult Style()
@@ -69,6 +69,15 @@ namespace Aesthetica.Controllers
             return View();
         }
 
+        public IActionResult SavedDesign()
+        {
+            var savedPosts = _context.savedposts
+        .Where(p => p.SavedAt != null)
+        .OrderByDescending(p => p.SavedAt)
+        .ToList();
+
+            return View(savedPosts);
+        }
         public IActionResult Measure()
         {
             return View();
