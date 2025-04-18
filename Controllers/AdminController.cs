@@ -32,13 +32,12 @@ namespace Aesthetica.Controllers
 
         public IActionResult Budget()
         {
-           return View();
-            // Retrieve all budget items from the database
+            // Correct logic: remove the unreachable first return statement
             var budgetItems = _context.BudgetItems.ToList();
 
-            // Pass the list of budget items to the view
             return View(budgetItems);
         }
+
         [HttpPost]
         public IActionResult CreateBudgetItem(BudgetItem model)
         {
