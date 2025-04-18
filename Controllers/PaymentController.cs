@@ -1,94 +1,140 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Razorpay.Api;
-using System;
-using System.Collections.Generic;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.Extensions.Configuration;
+//using Microsoft.AspNetCore.Http;
+//using Razorpay.Api;
+//using Aesthetica.Models;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
 
-[Route("Payment")]
-public class PaymentController : Controller
-{
-    // Use environment variables for API keys to keep them secure
-    private readonly string _razorpayKey = "rzp_test_4hNsPD4OI0Nsk"; // Public Key
-    private readonly string _razorpaySecret = "4UGkHGQw376kTuYWhIBaOEvC"; // Secret Key (store this securely)
+//namespace Aesthetica.Controllers
+//{
+//    public class PaymentController : Controller
+//    {
+//        private readonly IConfiguration _configuration;
+//        private readonly AppDbContext _context;
 
-    [HttpPost("CreateOrder")]
-    public IActionResult CreateOrder([FromBody] RazorpayOrderRequestModel model)
-    {
-        try
-        {
-            RazorpayClient client = new RazorpayClient(_razorpayKey, _razorpaySecret);
+//        public PaymentController(IConfiguration configuration, AppDbContext context)
+//        {
+//            _configuration = configuration;
+//            _context = context;
+//        }
 
-            // Define the order parameters
-            Dictionary<string, object> options = new Dictionary<string, object>
-            {
-                { "amount", model.Amount * 100 }, // Amount in paise (multiply by 100)
-                { "currency", "INR" },
-                { "receipt", $"rcptid_{Guid.NewGuid()}" },
-                { "payment_capture", 1 } // Immediate payment capture
-            };
+//        public IActionResult Payment(int propertyId)
+//        {
+//            var userId = HttpContext.Session.GetInt32("UserId");
 
-            // Create the Razorpay order
-            Razorpay.Api.Order order = client.Order.Create(options);
+//            if (!userId.HasValue)
+//            {
+//                ViewBag.IsLoggedIn = false;
+//                return View(); // Not logged in view
+//            }
 
-            // Return the orderId and public key to the frontend
-            return Json(new
-            {
-                orderId = order["id"].ToString(),
-                key = _razorpayKey // Public key (to be used in the frontend for Razorpay checkout)
-            });
-        }
-        catch (Exception ex)
-        {
-            // Log the exception
-            Console.WriteLine($"Error creating Razorpay order: {ex.Message}");
-            return StatusCode(500, new { message = "An error occurred while creating the payment order." });
-        }
-    }
+//            var paymentDetails = GetPaymentDetails(userId.Value, propertyId);
 
-    [HttpPost("VerifyPayment")]
-    public IActionResult VerifyPayment([FromBody] RazorpayPaymentResponse response)
-    {
-        try
-        {
-            RazorpayClient client = new RazorpayClient(_razorpayKey, _razorpaySecret);
+//            ViewBag.IsLoggedIn = true;
+//            ViewBag.PaymentDetails = paymentDetails;
 
-            // Verify the payment with the payment ID received from frontend
-            Payment payment = client.Payment.Fetch(response.PaymentId);
-            if (payment["status"].ToString() == "captured")
-            {
-                // Payment successful
-                return Json(new { success = true, message = "Payment verified" });
-            }
-            else
-            {
-                // Payment failed
-                return Json(new { success = false, message = "Payment failed" });
-            }
-        }
-        catch (Exception ex)
-        {
-            // Handle verification errors
-            Console.WriteLine($"Error verifying payment: {ex.Message}");
-            return StatusCode(500, new { message = "Payment verification failed" });
-        }
-    }
+//            return View();
+//        }
 
-    public IActionResult Success()
-    {
-        return View();
-    }
+//        private PaymentViewModel GetPaymentDetails(int userId, int propertyId)
+//        {
+//            var model = _context.Properties
+//                .Where(p => p.PropertyId == propertyId)
+//                .Select(p => new PaymentViewModel
+//                {
+//                    UserId = userId,
+//                    PropertyId = p.PropertyId.ToString(),
+//                    PropertyTitle = p.Title,
+//                    PropertyLocation = p.Address,
+//                    RentAmount = p.Price
+//                })
+//                .FirstOrDefault();
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-}
+//            return model;
+//        }
 
-public class RazorpayPaymentResponse
-{
-    public string PaymentId { get; set; } // Corrected to public property for deserialization
-}
+//        [HttpPost]
+//        public IActionResult ProceedPayment(int userId, string propertyId, decimal amount)
+//        {
+//            var key = _configuration["Razorpay:Key"];
+//            var secret = _configuration["Razorpay:KeySecret"];
 
-public class RazorpayOrderRequestModel
-{
-    public int Amount { get; set; }
-}
+//            var client = new RazorpayClient(key, secret);
+
+//            var options = new Dictionary<string, object>
+//            {
+//                { "amount", amount * 100 },
+//                { "currency", "INR" },
+//                { "receipt", Guid.NewGuid().ToString() },
+//                { "payment_capture", 1 }
+//            };
+
+//            try
+//            {
+//                var order = client.Order.Create(options);
+//                string orderId = order["id"].ToString();
+
+//                SavePayment(orderId, userId, propertyId, amount);
+
+//                ViewBag.orderId = orderId;
+//                ViewBag.Amount = amount;
+//                ViewBag.Key = key;
+//                ViewBag.UserId = userId;
+
+//                return View("PaymentConfirmation");
+//            }
+//            catch (Exception ex)
+//            {
+//                ViewBag.ErrorMessage = ex.Message;
+//                return View("Error");
+//            }
+//        }
+
+//        private void SavePayment(string orderId, int userId, string propertyId, decimal amount)
+//        {
+//            var payment = new PaymentViewModel
+//            {
+//                UserId = userId,
+//                PropertyId = propertyId,
+//                Amount = amount,
+//                OrderId = orderId,
+//                PaymentStatus = "Pending",
+//                PaymentDate = DateTime.Now
+//            };
+
+//            _context.Payments.Add(payment);  // Add Payment entity to the context
+//            _context.SaveChanges();  // Save changes to the database
+//        }
+
+
+//        public IActionResult VerifyPayment(string razorpayPaymentId, string orderId, string razorpaySignature)
+//        {
+//            try
+//            {
+//                UpdatePaymentStatus(razorpayPaymentId, orderId);
+//                return RedirectToAction("Index", "Home");
+//            }
+//            catch (Exception ex)
+//            {
+//                ViewBag.ErrorMessage = "Payment update failed: " + ex.Message;
+//                return View("Error");
+//            }
+//        }
+
+//        private void UpdatePaymentStatus(string paymentId, string orderId)
+//        {
+//            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
+
+//            if (payment != null)
+//            {
+//                payment.PaymentStatus = "Success";
+//                payment.RazorpayPaymentId = paymentId;
+//                payment.PaymentDate = DateTime.Now;
+
+//                _context.SaveChanges();
+//            }
+//        }
+//    }
+//}

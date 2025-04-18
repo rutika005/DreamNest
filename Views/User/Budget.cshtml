@@ -48,8 +48,9 @@
                 <strong id="materials-amount">₹0</strong>
             </div>
         </div>
-        <button id="payNowBtn">Pay Now</button>
-    </div>
+    </div><br /><br />
+    @* <a asp-controller="Payment" asp-action="Payment" asp-route-propertyId="@Model.PropertyId" class="btn btn-primary mb-2">Pay Now</a> *@
+
 </section>
 
 <script>
@@ -81,50 +82,4 @@
         document.getElementById("spent-amount").innerText = `₹${spent}`;
         document.getElementById("remaining-amount").innerText = `₹${remaining}`;
     }
-</script>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-<script>
-    document.getElementById("payNowBtn").addEventListener("click", function (e) {
-        e.preventDefault();
-
-        let totalAmount = document.getElementById("total-budget").value; // Get the total amount dynamically
-
-        // Step 1: Call your backend to create Razorpay Order
-        fetch('/Payment/CreateOrder', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ Amount: totalAmount }),
-        })
-        .then(res => res.json())
-        .then(data => {
-            // Step 2: Initialize Razorpay Checkout with orderId
-            var options = {
-                "key": data.key,
-                "amount": totalAmount * 100, // This must match backend order amount
-                "currency": "INR",
-                "name": "Aesthetica Budget",
-                "description": "Payment for Budget",
-                "order_id": data.orderId,
-                "handler": function (response) {
-                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-                    // Optional: Send response to server for verification
-                },
-                "prefill": {
-                    "name": "Rutika",
-                    "email": "rutika@example.com",
-                    "contact": "9876543210"
-                },
-                "theme": {
-                    "color": "#3399cc"
-                }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
-        })
-        .catch(err => console.error(err));
-    });
 </script>
