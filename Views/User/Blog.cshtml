@@ -17,6 +17,7 @@
         <img src="https://cdn.sanity.io/images/fud515dx/production/24026e1fbb2f92b0d266fa701eed8d1387067cb6-5760x3240.jpg?q=80" alt="Small Space Solutions"><br /><br />
         <div class="blog-content">
             <span class="blog-type">Tips</span><br /><br />
+            <i class="fa-regular fa-bookmark save-icon" title="Save this post"></i>
             <h3 class="blog-head">Small Space Solutions: Maximizing Your Home</h3>
             <p>Discover clever ways to make the most of limited space with these expert tips.</p>
         </div>
@@ -26,6 +27,7 @@
         <img src="https://www.hindustantimes.com/ht-img/img/2023/08/26/550x309/spacejoy-YqFz7UMm8qE-unsplash_1693020511390_1693022466867.jpg" alt="Color Psychology"><br /><br />
         <div class="blog-content">
             <span class="blog-type">Color Guide</span><br /><br />
+            <i class="fa-regular fa-bookmark save-icon" title="Save this post"></i>
             <h3 class="blog-head">Color Psychology in Interior Design</h3>
             <p>Learn how different colors can affect mood and atmosphere in your space.</p>
         </div>
@@ -35,8 +37,20 @@
         <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/JW/EN/UC/113948667/designer-sofa-set-500x500.jpg" alt="Scandinavian Design"><br /><br />
         <div class="blog-content">
             <span class="blog-type">Inspiration</span><br /><br />
+            <i class="fa-regular fa-bookmark save-icon" title="Save this post"></i>
             <h3 class="blog-head">Scandinavian Design Elements</h3>
             <p>Explore the key elements that make Scandinavian design so appealing.</p>
         </div>
     </div>
 </section>
+
+
+<script>
+    document.querySelectorAll('.save-icon').forEach(icon => {
+        icon.addEventListener('click', () => {
+            icon.classList.toggle('fa-regular');
+            icon.classList.toggle('fa-solid');
+            icon.classList.toggle('active');
+        });
+    });
+</script>
