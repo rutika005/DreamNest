@@ -33,7 +33,23 @@ namespace Aesthetica.Controllers
 
         public IActionResult Blog()
         {
-            return View();
+            var savedPosts = _context.savedposts.OrderByDescending(p => p.SavedAt).ToList();
+
+            return View(savedPosts);
+        }
+
+        [HttpPost("save-post")]
+        public IActionResult SavePost([FromBody] SavedPost post)
+        {
+            if (ModelState.IsValid)
+            {
+                post.SavedAt = DateTime.Now;
+                _context.savedposts.Add(post);
+                _context.SaveChanges();
+                return Ok(new { success = true });
+            }
+
+            return BadRequest(new { success = false, message = "Invalid data" });
         }
 
         public IActionResult Style()
