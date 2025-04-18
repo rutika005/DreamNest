@@ -24,7 +24,6 @@ namespace Aesthetica.Controllers
             return View();
         }
 
-
         public IActionResult Logout()
         {
             HttpContext.Session.Clear(); // Session deleted
