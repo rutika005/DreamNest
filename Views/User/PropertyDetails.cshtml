@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "PropertyDetails";
+}
+
+<form method="post" asp-controller="Payment" asp-action="ProceedPayment">
+    <input type="hidden" name="userId" value="@Model.UserId" />
+    <input type="hidden" name="propertyId" value="@Model.PropertyId" />
+    <input type="hidden" name="amount" value="@Model.RentAmount" />
+
+    <button type="submit" class="btn btn-primary w-100 mb-2">Proceed to Payment</button>
+</form>
+
+

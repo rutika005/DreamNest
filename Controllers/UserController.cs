@@ -43,6 +43,14 @@ namespace Aesthetica.Controllers
 
         public IActionResult Budget()
         {
+            //var model = new PaymentViewModel
+            //{
+            //    // Populate dummy/test values to avoid nulls
+            //    UserId=1,
+            //    PropertyID = 1,
+            //    Amount = 0
+            //    // Add other required properties here
+            //};
             return View();
         }
 
