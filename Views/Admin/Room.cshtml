@@ -1,6 +1,5 @@
 ﻿@model List<Aesthetica.Models.Room>
 
-
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -86,8 +85,6 @@
     </div>
 </div>
 
-
-<!-- Modal for Adding New Room -->
 <div id="addRoomModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
@@ -123,7 +120,6 @@
     const delRoomBtn = document.querySelector(".delete");
     const closeBtn = document.querySelector(".close-btn");
 
-    // Open modal
     if (addRoomBtn) {
         addRoomBtn.onclick = () => {
             addRoomModal.style.display = "block";
@@ -157,7 +153,7 @@
     const designer = document.getElementById("Designer");
     const dueDate = document.getElementById("DueDate");
 
-    // Open add modal
+ 
     addBtn.onclick = () => {
         title.textContent = "Add New Room";
         form.action = "/Admin/AddRoom";
@@ -170,11 +166,10 @@
         modal.style.display = "block";
     };
 
-    // Close modal
+
     closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
 
-    // Open modal in edit mode
     document.querySelectorAll(".edit").forEach(button => {
         button.addEventListener("click", () => {
             title.textContent = "Edit Room";
@@ -191,7 +186,6 @@
         });
     });
 
-    // Confirm deletion
     document.querySelectorAll(".delete").forEach(button => {
         button.addEventListener("click", () => {
             if (confirm("Are you sure you want to delete this room?")) {

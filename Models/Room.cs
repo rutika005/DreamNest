@@ -5,16 +5,16 @@ namespace Aesthetica.Models
 {
     public class Room
     {
-        public int RoomId { get; set; }           // Unique ID for the room
+        public int RoomId { get; set; }          
         [Required]
-        public string RoomName { get; set; }      // Name of the room
+        public string RoomName { get; set; }    
         [Required]
-        public string Project { get; set; }       // Project associated with the room
+        public string Project { get; set; }      
         [Required]
-        public string Status { get; set; }        // Status of the room (e.g., In Progress, Completed, On Hold)
+        public string Status { get; set; }       
         [Required]
-        public string Designer { get; set; }      // Designer handling the room
+        public string Designer { get; set; }    
         [Required]
-        public DateTime DueDate { get; set; }     // Due date for the project
+        public DateTime DueDate { get; set; }    
     }
 }

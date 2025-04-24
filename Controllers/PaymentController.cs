@@ -43,20 +43,6 @@ namespace Aesthetica.Controllers
 
             ViewBag.IsLoggedIn = true;
             return View();
-            //var userId = HttpContext.Session.GetInt32("UserId");
-
-            //if (!userId.HasValue)
-            //{
-            //    ViewBag.IsLoggedIn = false;
-            //    return View(); // Not logged in view
-            //}
-
-            //var paymentDetails = GetPaymentDetails(userId.Value, propertyId);
-
-            //ViewBag.IsLoggedIn = true;
-            //ViewBag.PaymentDetails = paymentDetails;
-
-            //return View();
         }
 
         private PaymentViewModel GetPaymentDetails(int userId, int propertyId)
@@ -99,7 +85,7 @@ namespace Aesthetica.Controllers
 
 
     {
-        { "amount", (int)(100) }, // Razorpay needs amount in paisa
+        { "amount", (int)(100) }, 
         { "currency", "INR" },
         { "receipt", Guid.NewGuid().ToString() },
         { "payment_capture", 1 }

@@ -67,7 +67,7 @@ namespace Aesthetica.Controllers
 
         public IActionResult Room()
         {
-            var rooms = _context.Rooms.ToList(); // or wherever you're getting the data from
+            var rooms = _context.Rooms.ToList(); 
             return View(rooms);
         }
 
@@ -151,8 +151,8 @@ namespace Aesthetica.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Rooms.Add(newRoom);  // Add the new room to the database
-                _context.SaveChanges();       // Save changes to the database
+                _context.Rooms.Add(newRoom);  
+                _context.SaveChanges();       
             }
 
             return View(newRoom);
