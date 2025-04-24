@@ -11,7 +11,7 @@
         public string ImageUrl { get; set; }
 
         public string Category { get; set; }
-        public DateTime? SavedAt { get; set; } // Nullable DateTime
+        public DateTime? SavedAt { get; set; } 
 
     }
 }

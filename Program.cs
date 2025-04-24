@@ -1,42 +1,36 @@
 ﻿using Aesthetica.Models;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // Add this using directive
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure; 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Bind email settings
 builder.Services.Configure<EmailSettings>(
 builder.Configuration.GetSection("EmailSettings"));
 
-builder.Services.AddScoped<UserService>();   // User Services
-builder.Services.AddScoped<EmailService>();  // Email Services
+builder.Services.AddScoped<UserService>();   
+builder.Services.AddScoped<EmailService>();  
 
-// Add session services
-builder.Services.AddDistributedMemoryCache(); // ✅ Required for session storage
-builder.Services.AddSession(); // ✅ Enable session services
+builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddSession(); 
 
-builder.Services.AddControllersWithViews(); // Keep your existing services
+builder.Services.AddControllersWithViews(); 
 
 
 builder.Services.Configure<RazorpayOptions>(builder.Configuration.GetSection("Razorpay"));
 
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register AppDbContext with MySQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-    new MySqlServerVersion(new Version(8, 0, 21)))); // UseMySql instead of UseMySQL
+    new MySqlServerVersion(new Version(8, 0, 21)))); 
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -45,10 +39,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//app.UseAuthorization();
 
-// Enable session middleware
-app.UseSession(); // ✅ Add this before `app.UseAuthorization()`
+app.UseSession(); 
 
 app.MapControllerRoute(
     name: "default",

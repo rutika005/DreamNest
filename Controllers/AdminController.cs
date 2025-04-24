@@ -32,7 +32,6 @@ namespace Aesthetica.Controllers
 
         public IActionResult Budget()
         {
-            // Correct logic: remove the unreachable first return statement
             var budgetItems = _context.BudgetItems.ToList();
 
             return View(budgetItems);
@@ -89,14 +88,13 @@ namespace Aesthetica.Controllers
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Session deleted
-            return RedirectToAction("Index", "Home"); // return toguest panel
+            HttpContext.Session.Clear(); 
+            return RedirectToAction("Index", "Home"); 
         }
 
         [HttpPost]
         public ActionResult UpdateProfile(string FirstName, string LastName, string Email, string Bio)
         {
-            // Handle profile update logic (Save to DB, validate, etc.)
             TempData["Message"] = "Profile updated successfully!";
             return RedirectToAction("Settings");
         }
@@ -104,7 +102,6 @@ namespace Aesthetica.Controllers
         [HttpPost]
         public ActionResult UpdatePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
         {
-            // Handle password update logic (validation, hashing, saving to DB)
             if (NewPassword == ConfirmPassword)
             {
                 TempData["Message"] = "Password updated successfully!";
@@ -121,7 +118,6 @@ namespace Aesthetica.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Save image files
                 if (Thumbnail != null)
                 {
                     var thumbnailPath = Path.Combine("wwwroot/images", Thumbnail.FileName);
@@ -142,7 +138,7 @@ namespace Aesthetica.Controllers
                     blogPost.AuthorImage = AuthorImage.FileName;
                 }
 
-                _context.blogadmin.Add(blogPost); // assuming _context is your DB context
+                _context.blogadmin.Add(blogPost); 
                 _context.SaveChanges();
 
                 return RedirectToAction("BlogPosts");

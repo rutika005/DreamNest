@@ -1,4 +1,4 @@
-﻿using System.IO;  // For reading HTML files
+﻿using System.IO;  
 using System.Net.Mail;
 using System.Net;
 using Aesthetica.Models;
@@ -15,19 +15,16 @@ public class EmailService
         _context = context;
     }
 
-    // ✅ Load Email Template and Replace Dynamic Content
     private string LoadEmailTemplate(string templateName, Dictionary<string, string> replacements)
     {
         try
         {
             templateName = "EmailTemplate" + ".html";
-            // ✅ Ensure templateName is only a filename, NOT full HTML
             if (templateName.Contains("<") || templateName.Contains(">"))
             {
                 throw new ArgumentException("Invalid template name provided.");
             }
 
-            // ✅ Correct Path
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "templates", templateName);
 
             if (!File.Exists(path))
@@ -37,7 +34,6 @@ public class EmailService
 
             string emailBody = File.ReadAllText(path);
 
-            // ✅ Replace placeholders
             foreach (var replacement in replacements)
             {
                 emailBody = emailBody.Replace(replacement.Key, replacement.Value);
@@ -52,7 +48,6 @@ public class EmailService
     }
 
 
-    // ✅ Send Email with Template
     public void SendEmail(int userId, string subject, string templateName, Dictionary<string, string> replacements)
     {
         string toEmail = GetUserEmail(userId); 

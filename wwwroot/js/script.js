@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default link action
+            event.preventDefault(); 
             this.parentElement.classList.toggle("active");
         });
     });

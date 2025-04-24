@@ -5,7 +5,7 @@ namespace Aesthetica.Models
 {
     public class BudgetItem
     {
-        [Key] // If you have a primary key (e.g., an ID)
+        [Key] 
         public int BudgetItemId { get; set; }
 
         [Required(ErrorMessage = "Date is required.")]

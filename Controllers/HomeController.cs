@@ -12,8 +12,8 @@ namespace Aesthetica.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _context;  // Database context instance
-        private readonly EmailService _emailService;  // Email service instance
+        private readonly AppDbContext _context;  
+        private readonly EmailService _emailService;  
         private readonly IConfiguration _configuration;
 
         public HomeController(ILogger<HomeController> logger, AppDbContext context, EmailService emailService, IConfiguration configuration)
@@ -26,10 +26,7 @@ namespace Aesthetica.Controllers
 
         public IActionResult Index()
         {
-            //if (HttpContext.Session.GetString("Id") != null)
-            //{
-            //    return RedirectToAction("Index", "User");
-            //}
+          
             return View();
         }
 
@@ -64,7 +61,7 @@ namespace Aesthetica.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.contact.Add(model);  // Insert into database
+                _context.contact.Add(model);  
                 _context.SaveChanges();
                 ViewBag.Message = "Your message has been sent successfully!";
                 return View("Contact");
@@ -81,41 +78,28 @@ namespace Aesthetica.Controllers
         public IActionResult Register(RegisterModel model)
         {
             
-                //  Random token generate karo
-                model.token = Guid.NewGuid().ToString(); // Unique token generate karega
-                model.IsVerified = false; // Default false
+                model.token = Guid.NewGuid().ToString(); 
+                model.IsVerified = false; 
                 Console.WriteLine("Generated Token: " + model.token);
 
-                //// Validate Role (Ensure it's either "User" or "Admin")
-                //if (model.role != "User" && model.role != "Admin")
-                //{
-                //    ModelState.AddModelError("role", "Invalid role selected.");
-                //    return View(model);
-                //}
-
-                //  Save to Database
                 _context.userregister.Add(model);
                 _context.SaveChanges();
 
-                //  Prepare Verification Link
                 string verificationLink = Url.Action("VerifyEmail", "Home", new { model.token }, Request.Scheme);
 
-                //  Email Body
                 string emailBody = $"<h2>Welcome, {model.Name}!</h2><p>Please verify your email by clicking <a href='{verificationLink}'>here</a>.</p>";
 
-                //  Prepare replacements dictionary
                 var replacements = new Dictionary<string, string>
                 {
                     { "{Name}", model.Name },
                     { "{VERIFY_LINK}", $"https://localhost:7150/Home/VerifyEmail?token={model.token}" }
                 };
 
-                // ✅ Send Email
                 _emailService.SendEmail(model.Id, "Verify Your Email", emailBody, replacements);
                 Console.WriteLine($"Name: {model.Name}, Email: {model.Email}, Token: {model.token}");
 
 
-                //ViewBag.Message = "Registered successfully! Check your email to verify your account.";
+              
                 return RedirectToAction("Register", "Home");
             
         }
@@ -131,14 +115,12 @@ namespace Aesthetica.Controllers
             Console.WriteLine($"Entered Email: {email}");
             Console.WriteLine($"Entered Password: {password}");
 
-            // Check in Admin Table
             var admin = _context.admin.FirstOrDefault(a => a.Email == model.Email);
 
             if (admin != null)
             {
                 Console.WriteLine($"Admin Password Type: {admin.Pass}");
 
-                // Convert to string if needed
                 string adminPassword = admin.Pass.Trim();
 
                 if (admin != null && !string.IsNullOrEmpty(admin.Pass))
@@ -148,7 +130,7 @@ namespace Aesthetica.Controllers
                     HttpContext.Session.SetString("UserRole", "Admin");
                     Console.WriteLine($"Pass:  { model.Pass }");
 
-                    return RedirectToAction("Index", "Admin"); // Redirect to Admin Panel
+                    return RedirectToAction("Index", "Admin"); 
                 }
                 else
                 {
@@ -158,7 +140,6 @@ namespace Aesthetica.Controllers
                 }
             }
 
-            // If email is not in admin table, check in user table
             else if (_context.userregister.Any(u => u.Email == model.Email))
             {
                 var user = _context.userregister.FirstOrDefault(u => u.Email == model.Email);
@@ -233,22 +214,17 @@ namespace Aesthetica.Controllers
                 return View();
             }
 
-            // Generate a new token
             var newToken = Guid.NewGuid().ToString();
 
-            // Overwrite the existing token and update expiry time
             user.token = newToken;
             user.ResetTokenExpiry = DateTime.UtcNow.AddHours(1);
 
             _context.SaveChanges();
 
-            // ✅ Generate the reset link
             string resetLink = Url.Action("Resetpass", "Home", new { token = newToken }, Request.Scheme);
 
-            //  Prepare replacements dictionary
             var replacements = new string[] { "{VERIFY_LINK}", $"https://localhost:7150/Home/Resetpass?token={user.token = newToken}" };
 
-            // ✅ Call the email sending function
             await SendResetEmail(user.Email, replacements[1]);
 
             ViewBag.Message = "Password reset link has been sent to your email.";
@@ -301,10 +277,8 @@ namespace Aesthetica.Controllers
                 return View();
             }
 
-            // Update the password
             _context.Entry(user).Property(u => u.Pass).IsModified = true;
             _context.Entry(user).Property(u => u.token).IsModified = true;
-            //user.token = null; // Clear token
             user.ResetTokenExpiry = null;
 
             await _context.SaveChangesAsync();
