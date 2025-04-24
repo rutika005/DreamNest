@@ -46,16 +46,14 @@
         document.addEventListener("DOMContentLoaded", function () {
             const resetBtn = document.querySelector(".reset-btn");
             resetBtn.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevents the default reset behavior
+                event.preventDefault(); 
 
                 let form = document.querySelector("form");
-                form.reset(); // Clears the form fields
+                form.reset(); 
 
-                // Remove validation error messages
                 let validationErrors = document.querySelectorAll(".text-danger");
                 validationErrors.forEach(error => error.innerText = "");
 
-                // Reset input validation styles (if using Bootstrap validation styles)
                 let inputs = form.querySelectorAll("input, textarea");
                 inputs.forEach(input => {
                     input.classList.remove("input-validation-error");

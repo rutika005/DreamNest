@@ -29,7 +29,6 @@
         const banner = document.querySelector(".gallery-banner");
         const images = [...document.querySelectorAll(".gallery-banner img")];
 
-        // Clone images to ensure infinite scrolling effect
         images.forEach(img => {
             let clone = img.cloneNode(true);
             banner.appendChild(clone);
