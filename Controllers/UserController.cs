@@ -26,8 +26,8 @@ namespace Aesthetica.Controllers
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Session deleted
-            return RedirectToAction("Index", "Home"); // return toguest panel
+            HttpContext.Session.Clear(); 
+            return RedirectToAction("Index", "Home"); 
         }
 
         public IActionResult Blog()
