@@ -11,7 +11,7 @@ namespace Aesthetica.Models
     {
         internal string IdentityUserId;
 
-        [Key] // Primary Key for database
+        [Key] 
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Full Name is required")]

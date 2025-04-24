@@ -4,7 +4,7 @@ namespace Aesthetica.Models
 {
     public class ForgotpassModel
     {
-        [Key] // Primary Key for database
+        [Key] 
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Email is required")]

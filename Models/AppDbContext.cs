@@ -8,12 +8,12 @@ namespace Aesthetica.Models
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<ContactModel> contact { get; set; }  // Maps to Contacts table
-        public DbSet<RegisterModel> userregister { get; set; }  // Maps to Users table
+        public DbSet<ContactModel> contact { get; set; }  
+        public DbSet<RegisterModel> userregister { get; set; }  
         public DbSet<UserRegister> userRegister { get; set; }
         public DbSet<LoginModel> admin { get; set; }           
         public DbSet<BlogPost> blogadmin { get;  set; }
-        public DbSet<BudgetItem> BudgetItems { get; set; }  //for add new budget
+        public DbSet<BudgetItem> BudgetItems { get; set; }  
         public DbSet<SavedPost> savedposts { get; set; }
     }
 }
