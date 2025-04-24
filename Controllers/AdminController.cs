@@ -68,7 +68,8 @@ namespace Aesthetica.Controllers
 
         public IActionResult Room()
         {
-            return View();
+            var rooms = _context.Rooms.ToList(); // or wherever you're getting the data from
+            return View(rooms);
         }
 
         public IActionResult Career()
@@ -148,6 +149,48 @@ namespace Aesthetica.Controllers
             }
 
             return View("BlogPosts", _context.blogadmin.ToList());
+        }
+
+        public IActionResult AddRoom(Room newRoom)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Rooms.Add(newRoom);  // Add the new room to the database
+                _context.SaveChanges();       // Save changes to the database
+            }
+
+            return View(newRoom);
+        }
+        [HttpPost]
+        public IActionResult EditRoom(Room room)
+        {
+            if (ModelState.IsValid)
+            {
+                var existing = _context.Rooms.FirstOrDefault(r => r.RoomId == room.RoomId);
+                if (existing != null)
+                {
+                    existing.RoomName = room.RoomName;
+                    existing.Project = room.Project;
+                    existing.Status = room.Status;
+                    existing.Designer = room.Designer;
+                    existing.DueDate = room.DueDate;
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("RoomManagement");
+            }
+
+            return View(room);
+        }
+
+        public IActionResult DeleteRoom(int id)
+        {
+            var room = _context.Rooms.FirstOrDefault(r => r.RoomId == id);
+            if (room != null)
+            {
+                _context.Rooms.Remove(room);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("RoomManagement");
         }
 
     }

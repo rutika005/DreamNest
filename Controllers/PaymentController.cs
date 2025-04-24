@@ -1,140 +1,183 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.Extensions.Configuration;
-//using Microsoft.AspNetCore.Http;
-//using Razorpay.Api;
-//using Aesthetica.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using Razorpay.Api;
+using Aesthetica.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-//namespace Aesthetica.Controllers
-//{
-//    public class PaymentController : Controller
-//    {
-//        private readonly IConfiguration _configuration;
-//        private readonly AppDbContext _context;
+namespace Aesthetica.Controllers
+{
+    public class PaymentController : Controller
+    {
+        private readonly IConfiguration _configuration;
+        private readonly AppDbContext _context;
 
-//        public PaymentController(IConfiguration configuration, AppDbContext context)
-//        {
-//            _configuration = configuration;
-//            _context = context;
-//        }
+        public PaymentController(IConfiguration configuration, AppDbContext context)
+        {
+            _configuration = configuration;
+            _context = context;
+        }
 
-//        public IActionResult Payment(int propertyId)
-//        {
-//            var userId = HttpContext.Session.GetInt32("UserId");
+        public IActionResult Payment(int propertyId)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
 
-//            if (!userId.HasValue)
-//            {
-//                ViewBag.IsLoggedIn = false;
-//                return View(); // Not logged in view
-//            }
+            if (!userId.HasValue)
+            {
+                ViewBag.IsLoggedIn = false;
+                return View(); // Not logged in view
+            }
 
-//            var paymentDetails = GetPaymentDetails(userId.Value, propertyId);
+            var paymentDetails = GetPaymentDetails(userId.Value, propertyId);
 
-//            ViewBag.IsLoggedIn = true;
-//            ViewBag.PaymentDetails = paymentDetails;
+            if (paymentDetails != null)
+            {
+                ViewBag.PaymentDetails = paymentDetails;
+            }
+            else
+            {
+                ViewBag.PaymentDetails = null; 
+            }
 
-//            return View();
-//        }
+            ViewBag.IsLoggedIn = true;
+            return View();
+            //var userId = HttpContext.Session.GetInt32("UserId");
 
-//        private PaymentViewModel GetPaymentDetails(int userId, int propertyId)
-//        {
-//            var model = _context.Properties
-//                .Where(p => p.PropertyId == propertyId)
-//                .Select(p => new PaymentViewModel
-//                {
-//                    UserId = userId,
-//                    PropertyId = p.PropertyId.ToString(),
-//                    PropertyTitle = p.Title,
-//                    PropertyLocation = p.Address,
-//                    RentAmount = p.Price
-//                })
-//                .FirstOrDefault();
+            //if (!userId.HasValue)
+            //{
+            //    ViewBag.IsLoggedIn = false;
+            //    return View(); // Not logged in view
+            //}
 
-//            return model;
-//        }
+            //var paymentDetails = GetPaymentDetails(userId.Value, propertyId);
 
-//        [HttpPost]
-//        public IActionResult ProceedPayment(int userId, string propertyId, decimal amount)
-//        {
-//            var key = _configuration["Razorpay:Key"];
-//            var secret = _configuration["Razorpay:KeySecret"];
+            //ViewBag.IsLoggedIn = true;
+            //ViewBag.PaymentDetails = paymentDetails;
 
-//            var client = new RazorpayClient(key, secret);
+            //return View();
+        }
 
-//            var options = new Dictionary<string, object>
-//            {
-//                { "amount", amount * 100 },
-//                { "currency", "INR" },
-//                { "receipt", Guid.NewGuid().ToString() },
-//                { "payment_capture", 1 }
-//            };
+        private PaymentViewModel GetPaymentDetails(int userId, int propertyId)
+        {
+            var model = (from payment in _context.payments
+                         join property in _context.properties
+                         on payment.PropertyId equals property.PropertyId.ToString()  
+                         where payment.UserId == userId && payment.PropertyId == propertyId.ToString()  
+                         select new PaymentViewModel
+                         {
+                             UserId = userId,
+                             PropertyId = property.PropertyId.ToString(),
+                             PropertyTitle = property.Title,
+                             PropertyLocation = property.Address,
+                             RentAmount = property.Price,
+                         }).FirstOrDefault();
 
-//            try
-//            {
-//                var order = client.Order.Create(options);
-//                string orderId = order["id"].ToString();
-
-//                SavePayment(orderId, userId, propertyId, amount);
-
-//                ViewBag.orderId = orderId;
-//                ViewBag.Amount = amount;
-//                ViewBag.Key = key;
-//                ViewBag.UserId = userId;
-
-//                return View("PaymentConfirmation");
-//            }
-//            catch (Exception ex)
-//            {
-//                ViewBag.ErrorMessage = ex.Message;
-//                return View("Error");
-//            }
-//        }
-
-//        private void SavePayment(string orderId, int userId, string propertyId, decimal amount)
-//        {
-//            var payment = new PaymentViewModel
-//            {
-//                UserId = userId,
-//                PropertyId = propertyId,
-//                Amount = amount,
-//                OrderId = orderId,
-//                PaymentStatus = "Pending",
-//                PaymentDate = DateTime.Now
-//            };
-
-//            _context.Payments.Add(payment);  // Add Payment entity to the context
-//            _context.SaveChanges();  // Save changes to the database
-//        }
+            return model;
+        }
 
 
-//        public IActionResult VerifyPayment(string razorpayPaymentId, string orderId, string razorpaySignature)
-//        {
-//            try
-//            {
-//                UpdatePaymentStatus(razorpayPaymentId, orderId);
-//                return RedirectToAction("Index", "Home");
-//            }
-//            catch (Exception ex)
-//            {
-//                ViewBag.ErrorMessage = "Payment update failed: " + ex.Message;
-//                return View("Error");
-//            }
-//        }
+        [HttpPost]
+        public IActionResult ProceedPayment(int userId, string propertyId, decimal amount)
+        {
+             int finalAmount = 500;
 
-//        private void UpdatePaymentStatus(string paymentId, string orderId)
-//        {
-//            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
+            if (finalAmount < 100) 
+            {
+                amount = 100;
+                ViewBag.ErrorMessage = "Amount should be at least ₹1.";
+                return View("Error");
+            }
 
-//            if (payment != null)
-//            {
-//                payment.PaymentStatus = "Success";
-//                payment.RazorpayPaymentId = paymentId;
-//                payment.PaymentDate = DateTime.Now;
+            var key = _configuration["Razorpay:Key"];
+            var secret = _configuration["Razorpay:Secret"];
 
-//                _context.SaveChanges();
-//            }
-//        }
-//    }
-//}
+            var client = new RazorpayClient(key, secret);
+
+            var options = new Dictionary<string, object>
+
+
+    {
+        { "amount", (int)(100) }, // Razorpay needs amount in paisa
+        { "currency", "INR" },
+        { "receipt", Guid.NewGuid().ToString() },
+        { "payment_capture", 1 }
+    };
+
+            try
+            {
+                var order = client.Order.Create(options);
+                string orderId = order["id"].ToString();
+
+                SavePayment(orderId, userId, propertyId, amount);
+
+                ViewBag.orderId = orderId;
+                ViewBag.Amount = amount;
+                ViewBag.Key = key;
+                ViewBag.UserId = userId;
+
+                return View("PaymentConfirmation");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
+        }
+
+
+        public void SavePayment(string orderId, int userId, string propertyId, decimal amount)
+        {
+            try
+            {
+                var payment = new Models.Payment
+                {
+                    OrderId = orderId,
+                    UserId = userId,
+                    PropertyId = propertyId,
+                    Amount = amount,
+                    PaymentDate = DateTime.Now
+                };
+
+                _context.payments.Add(payment);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while saving payment: " + ex.Message, ex);
+            }
+        }
+
+
+
+
+        public IActionResult VerifyPayment(string razorpayPaymentId, string orderId, string razorpaySignature)
+        {
+            try
+            {
+                UpdatePaymentStatus(razorpayPaymentId, orderId);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Payment update failed: " + ex.Message;
+                return View("Error");
+            }
+        }
+
+        private void UpdatePaymentStatus(string paymentId, string orderId)
+        {
+            var payment = _context.payments.FirstOrDefault(p => p.OrderId == orderId);
+
+            if (payment != null)
+            {
+                payment.PaymentStatus = "Success";
+                payment.RazorpayPaymentId = paymentId;
+                payment.PaymentDate = DateTime.Now;
+
+                _context.SaveChanges();
+            }
+        }
+    }
+}

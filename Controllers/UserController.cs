@@ -12,6 +12,8 @@ namespace Aesthetica.Controllers
 
         private readonly AppDbContext _context;
 
+        public object JsonRequestBehavior { get; private set; }
+
         public UserController(AppDbContext context)
         {
             _context = context;
@@ -56,17 +58,23 @@ namespace Aesthetica.Controllers
             return View();
         }
 
-        public IActionResult Budget()
+        public IActionResult Budget(int propertyId)
         {
-            //var model = new PaymentViewModel
-            //{
-            //    // Populate dummy/test values to avoid nulls
-            //    UserId=1,
-            //    PropertyID = 1,
-            //    Amount = 0
-            //    // Add other required properties here
-            //};
-            return View();
+            var property = _context.properties.FirstOrDefault(p => p.PropertyId == propertyId);
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            var model = new PaymentViewModel
+            {
+                PropertyId = property.PropertyId.ToString(),
+                PropertyTitle = property.Title,
+                PropertyLocation = property.Address,
+                RentAmount = property.Price
+            };
+
+            return View(model);
         }
 
         public IActionResult SavedDesign()
@@ -86,6 +94,21 @@ namespace Aesthetica.Controllers
         public IActionResult Career()
         {
             return View();
+        }
+
+        public JsonResult GetJobDetails(int id)
+        {
+            var job = _context.JobListings.FirstOrDefault(j => j.Id == id);
+            if (job == null)
+                return Json(null);
+
+            return Json(new
+            {
+                title = job.Title,
+                location = job.Location,
+                jobType = job.JobType,
+                experience = job.Experience
+            });
         }
 
         public IActionResult Profile()

@@ -1,26 +1,45 @@
 ﻿@* @{ *@
-@*     ViewBag.Title = "Payment"; *@
+@*     ViewBag.Title = "Payment";  *@
 @*     var payment = ViewBag.PaymentDetails; *@
+@* }  *@
+@* h2>Property Payment</h2>  *@
+
+@* if (ViewBag.IsLoggedIn == false)  *@
+@* {   *@
+@*     <p>You must be logged in to proceed with the payment.</p>   *@
+@* }   *@
+@* else   *@
+@* {   *@
+@*     <div>   *@
+@*         <p><strong>Title:</strong> @payment.PropertyTitle</p>   *@
+@*         <p><strong>Location:</strong> @payment.PropertyLocation</p>   *@
+@*         <p><strong>Rent Amount:</strong> ₹@payment.RentAmount</p>   *@
+
+@*         <form asp-action="ProceedPayment" method="post">   *@
+@*             <input type="hidden" name="userId" value="@payment.UserId" />   *@
+@*             <input type="hidden" name="propertyId" value="@payment.PropertyId" />   *@
+@*             <input type="hidden" name="amount" value="@payment.RentAmount" />   *@
+@*             <button type="submit" class="btn btn-primary">Proceed to Pay</button>   *@
+@*         </form>   *@
+@*     </div>  *@
 @* } *@
 
-@* <h2>Property Payment</h2> *@
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var payment = ViewBag.PaymentDetails;
+}
 
-@* @if (ViewBag.IsLoggedIn == false) *@
-@* { *@
-@*     <p>You must be logged in to proceed with the payment.</p> *@
-@* } *@
-@* else *@
-@* { *@
-@*     <div> *@
-@*         <p><strong>Title:</strong> @payment.PropertyTitle</p> *@
-@*         <p><strong>Location:</strong> @payment.PropertyLocation</p> *@
-@*         <p><strong>Rent Amount:</strong> ₹@payment.RentAmount</p> *@
+<h1>Payment Page</h1>
 
-@*         <form asp-action="ProceedPayment" method="post"> *@
-@*             <input type="hidden" name="userId" value="@payment.UserId" /> *@
-@*             <input type="hidden" name="propertyId" value="@payment.PropertyId" /> *@
-@*             <input type="hidden" name="amount" value="@payment.RentAmount" /> *@
-@*             <button type="submit" class="btn btn-primary">Proceed to Pay</button> *@
-@*         </form> *@
-@*     </div> *@
-@* } *@
+@if (payment != null)
+{
+    <h2>Payment Details</h2>
+    <p><strong>Amount:</strong> @payment.Amount</p>
+    <p><strong>Date:</strong> @payment.Date</p>
+    <p><strong>Status:</strong> @payment.Status</p>
+}
+else
+{
+    <p>No payment details available.</p>
+}

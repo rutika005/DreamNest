@@ -10,7 +10,7 @@
             <p>📍 New York, NY</p>
             <p>💼 Full-time</p>
             <p>🎓 5+ years</p>
-            <a href="#">View Details ➝</a>
+            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
         </div>
 
         <div class="job-card">
@@ -18,7 +18,7 @@
             <p>📍 Los Angeles, CA</p>
             <p>💼 Full-time</p>
             <p>🎓 3+ years</p>
-            <a href="#">View Details ➝</a>
+            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
         </div>
 
         <div class="job-card">
@@ -26,7 +26,7 @@
             <p>📍 Chicago, IL</p>
             <p>💼 Full-time</p>
             <p>🎓 4+ years</p>
-            <a href="#">View Details ➝</a>
+            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
         </div>
 
         <div class="job-card">
@@ -34,7 +34,59 @@
             <p>📍 Remote</p>
             <p>💼 Contract</p>
             <p>🎓 2+ years</p>
-            <a href="#">View Details ➝</a>
+            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="jobModal" tabindex="-1" aria-labelledby="jobModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jobModalLabel">Job Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>📍 Location:</strong> <span id="jobLocation"></span></p>
+                <p><strong>💼 Type:</strong> <span id="jobType"></span></p>
+                <p><strong>🎓 Experience:</strong> <span id="jobExperience"></span></p>
+                <form>
+                    <!-- Sample form input -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Upload Resume</label>
+                        <input type="file" class="form-control" id="resume" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Apply Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var jobModal = document.getElementById('jobModal');
+    jobModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+
+      var title = button.getAttribute('data-title');
+      var location = button.getAttribute('data-location');
+      var type = button.getAttribute('data-type');
+      var exp = button.getAttribute('data-exp');
+
+      var modalTitle = jobModal.querySelector('.modal-title');
+      var jobLocation = jobModal.querySelector('#jobLocation');
+      var jobType = jobModal.querySelector('#jobType');
+      var jobExperience = jobModal.querySelector('#jobExperience');
+
+      modalTitle.textContent = title;
+      jobLocation.textContent = location;
+      jobType.textContent = type;
+      jobExperience.textContent = exp;
+    });
+</script>

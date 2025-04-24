@@ -1,8 +1,11 @@
-﻿@{
+﻿@model Aesthetica.Models.PaymentViewModel
+
+@{
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <section class="budget-planner">
+    <form asp-controller="Payment" asp-action="ProceedPayment" method="post">
     <h2>Budget Planner</h2>
     <div class="budget-container">
         <!-- Project Overview -->
@@ -11,7 +14,7 @@
             <div class="budget-details">
                 <div class="budget-item">
                     <span>Total Budget</span>
-                    <input type="number" id="total-budget" placeholder="Enter Total Budget" oninput="updateBudget()">
+                    <input type="number" id="total-budget" name="budget"placeholder="Enter Total Budget" oninput="updateBudget()">
                 </div>
                 <div class="budget-item">
                     <span>Spent</span>
@@ -49,7 +52,13 @@
             </div>
         </div>
     </div><br /><br />
+        <!-- Hidden fields for userId and propertyId -->
+        <input type="hidden" name="userId" value="@ViewBag.UserId" />
+        <input type="hidden" name="propertyId" value="@ViewBag.PropertyId" />
+        <button id="pay-button" class="btn btn-primary">Pay Now</button>
+    </form>
     @* <a asp-controller="Payment" asp-action="Payment" asp-route-propertyId="@Model.PropertyId" class="btn btn-primary mb-2">Pay Now</a> *@
+
 
 </section>
 
@@ -82,4 +91,10 @@
         document.getElementById("spent-amount").innerText = `₹${spent}`;
         document.getElementById("remaining-amount").innerText = `₹${remaining}`;
     }
+</script>
+
+<script>
+    document.getElementById("pay-button").onclick = function () {
+        rzp.open();
+    };
 </script>
