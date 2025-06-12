@@ -93,7 +93,8 @@ namespace Aesthetica.Controllers
 
         public IActionResult Career()
         {
-            return View();
+            var jobs = _context.JobListings.ToList();
+            return View(jobs);
         }
 
         public JsonResult GetJobDetails(int id)
@@ -106,7 +107,7 @@ namespace Aesthetica.Controllers
             {
                 title = job.Title,
                 location = job.Location,
-                jobType = job.JobType,
+                jobType = job.Type,
                 experience = job.Experience
             });
         }

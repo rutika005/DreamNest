@@ -1,41 +1,27 @@
-﻿@{
+﻿@model List<Aesthetica.Models.JobListing>
+
+@{
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <section class="job-listings">
     <h2>Join Our Team</h2>
     <div class="job-container">
-        <div class="job-card">
-            <h3>Senior Interior Designer</h3>
-            <p>📍 New York, NY</p>
-            <p>💼 Full-time</p>
-            <p>🎓 5+ years</p>
-            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
-        </div>
-
-        <div class="job-card">
-            <h3>Design Consultant</h3>
-            <p>📍 Los Angeles, CA</p>
-            <p>💼 Full-time</p>
-            <p>🎓 3+ years</p>
-            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
-        </div>
-
-        <div class="job-card">
-            <h3>Project Manager</h3>
-            <p>📍 Chicago, IL</p>
-            <p>💼 Full-time</p>
-            <p>🎓 4+ years</p>
-            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
-        </div>
-
-        <div class="job-card">
-            <h3>3D Visualization Artist</h3>
-            <p>📍 Remote</p>
-            <p>💼 Contract</p>
-            <p>🎓 2+ years</p>
-            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#jobModal">View Details ➝</a>
-        </div>
+        @foreach (var job in Model)
+        {
+            <div class="job-card">
+                <h3 class="modal-title">@job.Title</h3>
+                <p id="jobLocation">📍 @job.Location</p>
+                <p id="jobType">💼 @job.Type</p>
+                <p id="jobExperience">🎓 @job.Experience</p>
+                <a href="#" class="btn" data-bs-toggle="modal"
+                   data-bs-target="#jobModal"
+                   data-title="@job.Title"
+                   data-location="@job.Location"
+                   data-type="@job.Type"
+                   data-exp="@job.Experience">View Details ➝</a>
+            </div>
+        }
     </div>
 </section>
 
