@@ -4,14 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Aesthetica.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly AppDbContext _context;
-
         public object JsonRequestBehavior { get; private set; }
 
         public UserController(AppDbContext context)
@@ -28,8 +25,8 @@ namespace Aesthetica.Controllers
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); 
-            return RedirectToAction("Index", "Home"); 
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Blog()
@@ -58,20 +55,16 @@ namespace Aesthetica.Controllers
             return View();
         }
 
-        public IActionResult Budget(int propertyId)
+        // UPDATED: Removed propertyId dependency
+        public IActionResult Budget()
         {
-            var property = _context.properties.FirstOrDefault(p => p.PropertyId == propertyId);
-            if (property == null)
-            {
-                return NotFound();
-            }
-
+            // Create an empty model so page loads without property data
             var model = new PaymentViewModel
             {
-                PropertyId = property.PropertyId.ToString(),
-                PropertyTitle = property.Title,
-                PropertyLocation = property.Address,
-                RentAmount = property.Price
+                PropertyId = "0",
+                PropertyTitle = "N/A",
+                PropertyLocation = "N/A",
+                RentAmount = 0
             };
 
             return View(model);
@@ -80,12 +73,13 @@ namespace Aesthetica.Controllers
         public IActionResult SavedDesign()
         {
             var savedPosts = _context.savedposts
-        .Where(p => p.SavedAt != null)
-        .OrderByDescending(p => p.SavedAt)
-        .ToList();
+                .Where(p => p.SavedAt != null)
+                .OrderByDescending(p => p.SavedAt)
+                .ToList();
 
             return View(savedPosts);
         }
+
         public IActionResult Measure()
         {
             return View();
